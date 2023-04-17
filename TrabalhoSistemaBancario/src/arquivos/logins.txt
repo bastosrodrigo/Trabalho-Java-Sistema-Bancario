@@ -1,6 +1,0 @@
-CARGO;NOME;CPF;SENHA
-Diretor;Rodrigo;287.654.000-20;123
-Gerente;Juliana;169.204.230-06;321
-Presidente;Luis;733.202.160-90;213
-Funcionario;William;229.482.900-07;132
-Cliente;Caio;085.851.800-72;231

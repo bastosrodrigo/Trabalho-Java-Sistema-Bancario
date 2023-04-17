@@ -1,8 +1,7 @@
-package clientes;
+package pessoas;
 
-public class Cliente {
+public abstract class Cliente {
 	
-	private String cargo;
 	private String nome;
 	private String cpf;
 	private int senha;
@@ -11,31 +10,17 @@ public class Cliente {
 	public Cliente() {
 		
 	}
-
-
-	public Cliente(String cargo, String nome, String cpf, int senha) {
+	
+	public Cliente(String nome, int senha, String cpf) {
 		super();
-		this.cargo = cargo;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.senha = senha;
 	}
 
-
-	public String getCargo() {
-		return cargo;
-	}
-
-
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
-
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -64,7 +49,7 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [cargo=" + cargo + ", nome=" + nome + ", cpf=" + cpf + ", senha=" + senha + "]";
+		return "Cliente [nome=" + nome + ", cpf=" + cpf + ", senha=" + senha + "]";
 	}
 	
 	
