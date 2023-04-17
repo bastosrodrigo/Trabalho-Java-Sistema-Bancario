@@ -13,7 +13,7 @@ public abstract class Conta extends Cliente{
 	private double tributacaoSaque;
 	private double tributacaoDeposito;
 	private double tributacaoTransferencia;
-	List<String> movimentacoes = new ArrayList<>();
+	private List<String> movimentacoes = new ArrayList<>();
 	
 	public Conta() {
 		
