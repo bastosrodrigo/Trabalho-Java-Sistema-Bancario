@@ -4,6 +4,10 @@ public class ContaCorrente extends Conta {
 
 	private String tipo = "Conta Corrente";
 	
+	private double tributacaoSaque;
+	private double tributacaoDeposito;
+	private double tributacaoTransferencia;
+	
 	public ContaCorrente() {
 		
 	}
