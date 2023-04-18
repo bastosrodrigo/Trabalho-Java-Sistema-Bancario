@@ -20,24 +20,27 @@ public class ContaCorrente extends Conta {
 		return tributacaoSaque;
 	}
 
-	public void setTributacaoSaque(double tributacaoSaque) {
-		this.tributacaoSaque = tributacaoSaque;
+	public void setTributacaoSaque() {
+		this.tributacaoSaque += 0.10;
+		this.setSaldo(getSaldo() - 0.10);
 	}
 
 	public double getTributacaoDeposito() {
 		return tributacaoDeposito;
 	}
 
-	public void setTributacaoDeposito(double tributacaoDeposito) {
-		this.tributacaoDeposito = tributacaoDeposito;
+	public void setTributacaoDeposito() {
+		this.tributacaoDeposito += 0.10;
+		this.setSaldo(getSaldo() - 0.10);
 	}
 
 	public double getTributacaoTransferencia() {
 		return tributacaoTransferencia;
 	}
 
-	public void setTributacaoTransferencia(double tributacaoTransferencia) {
-		this.tributacaoTransferencia = tributacaoTransferencia;
+	public void setTributacaoTransferencia() {
+		this.tributacaoTransferencia += 0.20;
+		this.setSaldo(getSaldo() - 0.20);
 	}
 	
 }

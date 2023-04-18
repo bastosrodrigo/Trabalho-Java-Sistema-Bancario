@@ -2,10 +2,9 @@ package contas;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import pessoas.Cliente;
 
-public abstract class Conta extends Cliente {
+public abstract class Conta extends Cliente implements Operacoes{
 
 	private static int id = 1;
 	private double saldo;
@@ -46,9 +45,14 @@ public abstract class Conta extends Cliente {
 	}
 
 	public void sacar(double valor) {
+		
 		if (valor > 0 && this.getSaldo() >= valor) {
 			this.saldo -= valor;
-			System.out.println(valor + "foram sacados de sua conta com sucesso!");
+			System.out.println("\n" + valor + " foram sacados de sua conta com sucesso!");
+				if (this instanceof ContaCorrente) {
+				((ContaCorrente) this).setTributacaoSaque();
+				 
+				}				
 		} else {
 			System.out.println("Saldo insuficiente");
 		}
@@ -58,8 +62,11 @@ public abstract class Conta extends Cliente {
 	public void depositar(double valor) {
 		if (valor > 0) {
 			this.saldo += valor;
-			System.out.println(valor + "foi adicionado ao seu saldo!");
-		} else {
+			System.out.println("\n" + valor + " foi adicionado ao seu saldo!");
+			if (this instanceof ContaCorrente) {
+				((ContaCorrente) this).setTributacaoDeposito();
+			}
+			} else {
 			System.out.println("Impossível depositar tal valor!");
 		}
 
@@ -69,10 +76,12 @@ public abstract class Conta extends Cliente {
 		this.saldo -= valor;
 		c.setSaldo(c.getSaldo() + valor);
 		
-			System.out.println(valor + "foram transferidos de sua conta com sucesso!");
+			System.out.println("\n" + valor + " foram transferidos de sua conta com sucesso!");
+			if (this instanceof ContaCorrente) {
+				((ContaCorrente) this).setTributacaoTransferencia();
+			}
 		} else {
 			System.out.println("Saldo insuficiente");
 		}
 	}
-	//implementar método extrato
 }

@@ -63,7 +63,7 @@ public class MenuInicial {
 	public void menuCliente(Conta c, Map<String, Conta> validacao_conta) {
 
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("|*********************** MENU CONTA ********************|");
+		System.out.println("\n|*********************** MENU CONTA ********************|");
 		System.out.println("|========================================================");
 		System.out.println("| 1 -	Movimentações na conta				|");
 		System.out.println("| 2  - 	Relatórios					|");
@@ -78,7 +78,7 @@ public class MenuInicial {
 			movimentacoes(c, validacao_conta);
 			break;
 		case 2:
-			//relatorios();
+			relatorios(c);
 			break;
 		case 3:
 			menuInicial(MenuInicial.getContas(), MenuInicial.getFuncionarios(), MenuInicial.getCredenciais(), MenuInicial.getValidacao_conta(), MenuInicial.getValidacao_funcionario());
@@ -96,14 +96,14 @@ public class MenuInicial {
 	
 	public void movimentacoes(Conta c, Map<String, Conta> validacao_conta) {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("|*********************** MENU CONTA - MOVIMENTAÇÕES ********************|");
+		System.out.println("\n|*************** MENU CONTA - MOVIMENTAÇÕES ************|");
 		System.out.println("|========================================================");
-		System.out.println("| 1 -	Saque				|");
+		System.out.println("| 1 -	Saque						|");
 		System.out.println("| 2  - 	Depósito					|");
-		System.out.println("| 3  -	Transferência				|");
-		System.out.println("| 4  -	Extrato				|");
-		System.out.println("| 5  -	Voltar				|");
-		System.out.println("|========================================================");
+		System.out.println("| 3  -	Transferência					|");
+		System.out.println("| 4  -	Extrato						|");
+		System.out.println("| 5  -	Voltar						|");
+		System.out.println("|========================================================\n");
 		
 		System.out.print("\n\nDigite a opção desejada: ");
 		int opcaoMovimentacao = scanner.nextInt();
@@ -147,6 +147,56 @@ public class MenuInicial {
 				System.out.println("Opção inválida. Digite novamente:");
 				movimentacoes(c, validacao_conta);
 				break;
+		}
+	}
+	public void relatorios (Conta c) {
+	
+	Scanner scanner = new Scanner(System.in);
+	
+	System.out.println("\n|*********************** RELATÓRIOS ********************|");
+	System.out.println("|========================================================");
+	System.out.println("| 1 -	Saldo						|");
+	System.out.println("| 2  - 	Relatório de tributações			|");
+	System.out.println("| 3  -	Relatório de rendimentos			|");
+	System.out.println("| 4  -	Voltar						|");
+	System.out.println("|========================================================");
+	System.out.print("\n\nDigite a opção desejada: ");
+	
+	int opcaoRelatorio = scanner.nextInt();
+	
+		switch (opcaoRelatorio) {
+	
+		case 1:
+			System.out.println("Seu saldo é de: " + c.getSaldo() + "\n");
+			relatorios (c);
+			break;
+		case 2:
+				if (c instanceof ContaCorrente){
+					
+					double totalT = ((ContaCorrente) c).getTributacaoSaque()+((ContaCorrente) c).getTributacaoDeposito()+((ContaCorrente) c).getTributacaoTransferencia();
+					
+					System.out.println("\n|*********************** TRIBUTAÇÕES *******************|");
+					System.out.println("|========================================================");
+					System.out.println("|	Tributação de saques: "+ ((ContaCorrente) c).getTributacaoSaque()+"			|");
+					System.out.println("|	Tributação de depósitos: " + ((ContaCorrente) c).getTributacaoDeposito()+"			|");
+					System.out.println("|	Tributação de transferencias: " + ((ContaCorrente) c).getTributacaoTransferencia()+"		|");
+					System.out.println("|	Total de tributação: " + totalT +"			|");
+					System.out.println("|========================================================\n\n");
+				}else {
+				System.out.println("Opção não disponível para seu tipo de conta");
+				}
+			relatorios (c);
+			break;
+		case 3:
+			relatorios (c);
+			break;
+		case 4:
+			menuCliente (c, getValidacao_conta());
+			break;
+		default:
+			System.out.println("Opção inválida. Digite novamente:");
+			relatorios (c);
+			break;
 		}
 	}
 
