@@ -188,6 +188,12 @@ public class MenuInicial {
 			relatorios (c);
 			break;
 		case 3:
+			System.out.println("Digite a quantidade de dias da aplicação:");
+			int dias = scanner.nextInt();
+			System.out.println("Digite o valor a ser aplicado:");
+			double valor = scanner.nextDouble();
+			double rendimento = valor * (dias/30) * 0.01;
+			System.out.println("O rendimento será de: " + rendimento);
 			relatorios (c);
 			break;
 		case 4:

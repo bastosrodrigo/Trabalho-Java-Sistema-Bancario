@@ -21,7 +21,7 @@ public class SistemaBancario {
 		Map<String, Conta> validacao_conta = new HashMap<>(); // relaciona o CPF com a conta
 		Map<String, Funcionario> validacao_funcionario = new HashMap<>(); // relaciona o CPF com o funcionário
 
-		Leitura.leitor(".\\src\\arquivos\\pessoas.txt", contas, funcionarios, credenciais, validacao_conta,
+		Leitura.leitor("./src/arquivos/pessoas.txt", contas, funcionarios, credenciais, validacao_conta,
 				validacao_funcionario);
 
 		MenuInicial menu = new MenuInicial();
