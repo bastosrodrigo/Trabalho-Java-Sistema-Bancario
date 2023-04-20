@@ -1,20 +1,18 @@
 package io;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
-import pessoas.Cliente;
 import pessoas.Diretor;
 import pessoas.Funcionario;
 import pessoas.Gerente;
 import pessoas.Presidente;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class Leitura {
 

@@ -9,6 +9,8 @@ import java.util.Map;
 import contas.Conta;
 import io.Leitura;
 import pessoas.Funcionario;
+import pessoas.Gerente;
+import pessoas.Diretor;
 import menu.MenuInicial;
 
 public class SistemaBancario {
@@ -24,9 +26,10 @@ public class SistemaBancario {
 		Leitura.leitor("./src/arquivos/pessoas.txt", contas, funcionarios, credenciais, validacao_conta,
 				validacao_funcionario);
 
+		Diretor d = new Diretor();
+		d.totalInfo(contas);
+		
 		MenuInicial menu = new MenuInicial();
 		menu.menuInicial(contas, funcionarios, credenciais, validacao_conta, validacao_funcionario);
-
 	}
-
 }

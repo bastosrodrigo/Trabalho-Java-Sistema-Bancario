@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pessoas.Cliente;
 
-public abstract class Conta extends Cliente implements Operacoes{
+public abstract class Conta extends Cliente implements Operacoes, Comparable<Conta>{
 
 	private static int id = 1;
 	private double saldo;
@@ -99,7 +99,15 @@ public abstract class Conta extends Cliente implements Operacoes{
 		for(int i =0; i < movimentacoes.size(); i++) {
 			System.out.println(movimentacoes.get(i));
 		}
-		
-		
+	}
+	
+	public int compareTo(Conta c) {
+		if (this.getNome().compareTo(c.getNome()) < 1) {
+			return -1;
+		}
+		if (this.getNome().compareTo(c.getNome()) > 1) {
+			return 1;
+		}
+		return 0;
 	}
 }

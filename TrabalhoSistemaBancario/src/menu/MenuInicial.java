@@ -27,14 +27,18 @@ public class MenuInicial {
 		MenuInicial.setValidacao_conta(validacao_conta);
 		MenuInicial.setValidacao_funcionario(validacao_funcionario);
 		
-		System.out.println("Digite seu CPF");
+		
+		System.out.println("╔════════════════════════════╗");
+		System.out.println("║   Digite seu CPF e SENHA:  ║");
+		System.out.println("╚════════════════════════════╝");
+		System.out.print("CPF: ");
 		String cpf = scanner.next();
-		System.out.println("Digite sua senha");
+		System.out.print("SENHA: ");
 		int senha = scanner.nextInt();
 		scanner.nextLine();
 
 		if (credenciais.containsKey(cpf) && credenciais.get(cpf) == senha) {
-			System.out.println("Login efetuado com sucesso");
+			System.out.println("Login efetuado com sucesso!");
 
 			if (validacao_conta.containsKey(cpf)) {
 				menuCliente(validacao_conta.get(cpf), validacao_conta);
@@ -56,7 +60,7 @@ public class MenuInicial {
 
 			}
 		} else {
-			System.out.println("Erro");
+			System.out.println("Erro! CPF ou SENHA incorreta!");
 		}
 
 	}
@@ -64,13 +68,13 @@ public class MenuInicial {
 	public void menuCliente(Conta c, Map<String, Conta> validacao_conta) {
 
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("\n|*********************** MENU CONTA ********************|");
-		System.out.println("|========================================================");
-		System.out.println("| 1 -	Movimentações na conta				|");
-		System.out.println("| 2  - 	Relatórios					|");
-		System.out.println("| 3  -	Voltar ao menu inicial				|");
-		System.out.println("| 4  -	Encerrar o programa				|");
-		System.out.println("|========================================================");
+		System.out.println("\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ MENU CONTA ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println("╔═══════════════════════════════════════════╗");
+		System.out.println("║ 1 -	Movimentações na conta		    ║");
+		System.out.println("║ 2  - 	Relatórios			    ║");
+		System.out.println("║ 3  -	Voltar ao menu inicial		    ║");
+		System.out.println("║ 4  -	Encerrar o programa		    ║");
+		System.out.println("╚═══════════════════════════════════════════╝");
 		System.out.print("\n\nDigite a opção desejada: ");
 		int opcaoConta = scanner.nextInt();
 
@@ -103,7 +107,8 @@ public class MenuInicial {
 		System.out.println("| 2  - 	Depósito					|");
 		System.out.println("| 3  -	Transferência					|");
 		System.out.println("| 4  -	Extrato						|");
-		System.out.println("| 5  -	Voltar						|");
+		System.out.println("| 5  -	Ver Funcionarios						|");
+		System.out.println("| 6  -	Voltar						|");
 		System.out.println("|========================================================\n");
 		
 		System.out.print("\n\nDigite a opção desejada: ");
@@ -143,6 +148,9 @@ public class MenuInicial {
 				movimentacoes(c, validacao_conta);
 				break;
 			case 5:
+				System.out.println(contas);
+				break;
+			case 6:
 				menuCliente(c, validacao_conta);
 				break;
 			default:
@@ -158,9 +166,12 @@ public class MenuInicial {
 	System.out.println("\n|*********************** RELATÓRIOS ********************|");
 	System.out.println("|========================================================");
 	System.out.println("| 1 -	Saldo						|");
-	System.out.println("| 2  - 	Relatório de tributações			|");
-	System.out.println("| 3  -	Relatório de rendimentos			|");
-	System.out.println("| 4  -	Voltar						|");
+	System.out.println("| 2  - 	Relatório de tributações	|");
+	System.out.println("| 3  -	Relatório de rendimentos	|");
+	System.out.println("| 4  -	Relatório de contas da agência						|");
+	System.out.println("| 5  -	Relatório de informações						|");
+	System.out.println("| 6  -	Relatório de capital						|");
+	System.out.println("| 7  -	Voltar						|");
 	System.out.println("|========================================================");
 	System.out.print("\n\nDigite a opção desejada: ");
 	
@@ -205,6 +216,15 @@ public class MenuInicial {
 			}
 			
 		case 4:
+			
+			break;
+		case 5:
+			//
+			break;
+		case 6:
+			//
+			break;
+		case 7:
 			menuCliente (c, getValidacao_conta());
 			break;
 		default:
