@@ -5,13 +5,13 @@ public abstract class Funcionario {
 	private String cargo;
 	private String nome;
 	private String cpf;
-	private int senha;
+	private String senha;
 	
 	public Funcionario () {
 		
 	}
 	
-	public Funcionario (String cargo, String nome, int senha, String cpf) {
+	public Funcionario (String cargo, String nome, String senha, String cpf) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.senha = senha;
@@ -36,10 +36,10 @@ public abstract class Funcionario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public int getSenha() {
+	public String getSenha() {
 		return senha;
 	}
-	public void setSenha(int senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 	@Override

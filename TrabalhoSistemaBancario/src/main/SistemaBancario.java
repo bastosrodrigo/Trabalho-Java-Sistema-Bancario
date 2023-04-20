@@ -19,16 +19,13 @@ public class SistemaBancario {
 
 		List<Conta> contas = new ArrayList<>(); // guarda todas as contas/clientes
 		List<Funcionario> funcionarios = new ArrayList<>(); // guarda todos os funcionários
-		Map<String, Integer> credenciais = new HashMap<>(); // guarda CPF + senha
+		Map<String, String> credenciais = new HashMap<>(); // guarda CPF + senha
 		Map<String, Conta> validacao_conta = new HashMap<>(); // relaciona o CPF com a conta
 		Map<String, Funcionario> validacao_funcionario = new HashMap<>(); // relaciona o CPF com o funcionário
 
 		Leitura.leitor("./src/arquivos/pessoas.txt", contas, funcionarios, credenciais, validacao_conta,
 				validacao_funcionario);
 
-		Diretor d = new Diretor();
-		d.totalInfo(contas);
-		
 		MenuInicial menu = new MenuInicial();
 		menu.menuInicial(contas, funcionarios, credenciais, validacao_conta, validacao_funcionario);
 	}

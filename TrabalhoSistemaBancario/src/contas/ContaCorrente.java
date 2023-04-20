@@ -12,7 +12,7 @@ public class ContaCorrente extends Conta {
 		
 	}
 	
-	public ContaCorrente(String nome, int senha, String cpf, int agencia, double saldo) {
+	public ContaCorrente(String nome, String senha, String cpf, int agencia, double saldo) {
 		super(nome,senha,cpf,agencia,saldo);
 	}
 

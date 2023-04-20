@@ -1,14 +1,14 @@
 TIPO;NOME;SENHA;CPF;AGENCIA;SALDO
-Conta Poupança;João;123;772.398.320-40;1;100
-Conta Poupança;Maria;456;866.165.500-52;2;100
-Conta Poupança;Vitória;789;324.451.390-58;3;100
+Conta Poupança;João;123;772.398.320-40;1;50000
+Conta Poupança;Maria;456;866.165.500-52;2;20000
+Conta Poupança;Vitória;789;324.451.390-58;3;1350
 Conta Poupança;Roberto;001;688.405.750-57;4;100
-Conta Poupança;Cecília;002;955.090.240-46;2;100
-Conta Corrente;Juliana;003;242.977.990-06;1;100
-Conta Corrente;Luis;004;672.475.560-30;2;100
+Conta Poupança;Cecília;002;955.090.240-46;2;25000
+Conta Corrente;Juliana;003;242.977.990-06;1;8100
+Conta Corrente;Luis;004;672.475.560-30;2;2150
 Conta Corrente;Caio;005;879.974.100-82;3;100
-Conta Corrente;Rodrigo;006;219.932.120-78;4;100
-Conta Corrente;William;007;872.895.900-07;4;100
+Conta Corrente;Rodrigo;006;219.932.120-78;4;8320
+Conta Corrente;William;007;872.895.900-07;4;10000
 Gerente;Carlos;679;847.450.560-79;3
 Gerente;William;007;872.895.900-07;4
 Diretor;Ciclano;000;449.326.700-36

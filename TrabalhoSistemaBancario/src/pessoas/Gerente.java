@@ -12,7 +12,7 @@ public class Gerente extends Funcionario {
 
 	}
 
-	public Gerente(String cargo, String nome, int senha, String cpf, int agencia) {
+	public Gerente(String cargo, String nome, String senha, String cpf, int agencia) {
 		super(cargo, nome, senha, cpf);
 		this.agencia = agencia;
 	}

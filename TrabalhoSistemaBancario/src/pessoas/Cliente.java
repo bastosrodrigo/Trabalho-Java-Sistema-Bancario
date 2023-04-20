@@ -4,14 +4,14 @@ public abstract class Cliente {
 	
 	private String nome;
 	private String cpf;
-	private int senha;
+	private String senha;
 	
 	
 	public Cliente() {
 		
 	}
 	
-	public Cliente(String nome, int senha, String cpf) {
+	public Cliente(String nome, String senha, String cpf) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
@@ -37,12 +37,12 @@ public abstract class Cliente {
 	}
 
 
-	public int getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
 
-	public void setSenha(int senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 

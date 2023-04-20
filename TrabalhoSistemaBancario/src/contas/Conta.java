@@ -15,7 +15,7 @@ public abstract class Conta extends Cliente implements Operacoes, Comparable<Con
 
 	}
 
-	public Conta(String nome, int senha, String cpf, int agencia, double saldo) {
+	public Conta(String nome, String senha, String cpf, int agencia, double saldo) {
 		id++;
 		this.setNome(nome);
 		this.setSenha(senha);

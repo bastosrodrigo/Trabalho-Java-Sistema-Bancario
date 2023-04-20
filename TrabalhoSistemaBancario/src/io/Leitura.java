@@ -16,7 +16,7 @@ import pessoas.Presidente;
 
 public class Leitura {
 
-	public static void leitor(String path, List<Conta> contas, List<Funcionario> funcionarios, Map<String, Integer> credenciais, Map<String, Conta> validacao_conta, Map<String, Funcionario> validacao_funcionario) throws IOException {
+	public static void leitor(String path, List<Conta> contas, List<Funcionario> funcionarios, Map<String, String> credenciais, Map<String, Conta> validacao_conta, Map<String, Funcionario> validacao_funcionario) throws IOException {
 
 		try {
 			BufferedReader leitor = new BufferedReader(new FileReader(path));
@@ -27,7 +27,7 @@ public class Leitura {
 					String[] valores = linha.split(";");
 					String cargo = valores[0];
 					String nome = valores[1];
-					int senha = Integer.parseInt(valores[2]);
+					String senha = valores[2];
 					String cpf = valores[3];
 					
 					switch (cargo) {
