@@ -1,5 +1,6 @@
 package menu;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import io.Gravacao;
 import pessoas.Diretor;
 import pessoas.Funcionario;
 import pessoas.Gerente;
@@ -102,6 +104,11 @@ public class MenuInicial {
 			break;
 		case 4:
 			System.out.println("Aplicação encerrada.");
+			try {
+				Gravacao.pessoas(getContas(), getFuncionarios());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			System.exit(0);
 			break;
 		default:

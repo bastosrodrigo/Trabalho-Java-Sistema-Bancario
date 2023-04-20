@@ -1,0 +1,6 @@
+Saque de: R$ 500,00
+Com tributação: R$ 500,10
+Deposito de: R$ 300,00
+Com tributação: R$ 299,90
+Transferencia de: R$ 150,00 para: 672.475.560-30
+Com tributação: R$ 150,20

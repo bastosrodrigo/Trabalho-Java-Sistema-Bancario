@@ -27,5 +27,6 @@ public class SistemaBancario {
 			
 		MenuInicial menu = new MenuInicial();
 		menu.menuInicial(contas, funcionarios, credenciais, validacao_conta, validacao_funcionario);
+		
 	}
 }

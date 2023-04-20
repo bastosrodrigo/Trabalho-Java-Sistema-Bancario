@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import contas.Conta;
@@ -15,8 +17,11 @@ public class Gravacao {
 	
 	
 	public static void teste() throws IOException {
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + data + ".txt", true));
+		
+		LocalDateTime data = LocalDateTime.now();
+        DateTimeFormatter formatar = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+        String dataFormatada = data.format(formatar);
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + dataFormatada + ".txt", true));
 		buffWrite.append("teste");
 	}
 	
@@ -50,5 +55,16 @@ public class Gravacao {
 			buffWrite.append(funcionarios.get(i).reescreveFuncionario() + "\n");
 			buffWrite.close();
 		}
+	}
+	
+	public static void extrato(List<String> extrato, Conta c) throws IOException {
+		LocalDateTime data = LocalDateTime.now();
+        DateTimeFormatter formatar = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+        String dataFormatada = data.format(formatar);
+        for (int i = 0; i < extrato.size(); i++) {
+        	BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "Extrato_" + c.getId() + "_" + dataFormatada + ".txt", true));
+    		buffWrite.append(extrato.get(i) + "\n");
+    		buffWrite.close();
+        }
 	}
 }

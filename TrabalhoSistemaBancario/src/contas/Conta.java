@@ -1,9 +1,11 @@
 package contas;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.Gravacao;
 import pessoas.Cliente;
 
 public abstract class Conta extends Cliente implements Operacoes, Comparable<Conta>{
@@ -100,6 +102,12 @@ public abstract class Conta extends Cliente implements Operacoes, Comparable<Con
 	public void extrato() {
 		for(int i =0; i < movimentacoes.size(); i++) {
 			System.out.println(movimentacoes.get(i));
+		}
+		
+		try {
+			Gravacao.extrato(movimentacoes, this);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
