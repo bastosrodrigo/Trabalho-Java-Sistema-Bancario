@@ -51,7 +51,7 @@ public class Leitura {
 							validacao_funcionario.put(cpf, gerente);
 							break;
 						case "Diretor":
-							Diretor diretor = new Diretor(nome, cpf, senha, cargo, ag);
+							Diretor diretor = new Diretor(cargo, nome, senha, cpf, ag);
 							funcionarios.add(diretor);
 							credenciais.put(cpf, senha);
 							validacao_funcionario.put(cpf, diretor);

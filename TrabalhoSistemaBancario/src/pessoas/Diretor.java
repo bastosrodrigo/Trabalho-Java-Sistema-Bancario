@@ -12,8 +12,8 @@ public class Diretor extends Gerente {
 		
 	}
 	
-	public Diretor(String nome, String cpf, String senha, String cargo, int agencia) {
-		super(nome, cpf, senha, cargo, agencia);
+	public Diretor(String cargo, String nome, String senha, String cpf, int agencia) {
+		super(cargo, nome, senha, cpf, agencia);
 	}
 	
 	public void totalInfo(List<Conta> contas) {

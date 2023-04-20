@@ -42,5 +42,10 @@ public class ContaCorrente extends Conta {
 		this.tributacaoTransferencia += 0.20;
 		this.setSaldo(getSaldo() - 0.20);
 	}
+
+	public String reescreveContaCorrente() {
+		return tipo + ";" + getNome() + ";" + getSenha() + ";" + getCpf() + ";" + getAgencia() + ";" + getSaldo();
+	}
+	
 	
 }

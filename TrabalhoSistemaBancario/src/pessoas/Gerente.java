@@ -7,21 +7,19 @@ import contas.Conta;
 
 public class Gerente extends Funcionario {
 
-	private int agencia;
-
 	public Gerente() {
 
 	}
 
 	public Gerente(String cargo, String nome, String senha, String cpf, int agencia) {
 		super(cargo, nome, senha, cpf);
-		this.agencia = agencia;
+		setAgencia(agencia);
 	}
 
 	public void totalContas(List<Conta> contas) {
 		int numeroContas = 0;
 		for (int i = 0; i < contas.size(); i++) {
-			if (contas.get(i).getAgencia() == this.agencia) {
+			if (contas.get(i).getAgencia() == getAgencia()) {
 				numeroContas++;
 			}
 		}

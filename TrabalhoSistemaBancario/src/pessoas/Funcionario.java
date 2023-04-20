@@ -6,6 +6,7 @@ public abstract class Funcionario {
 	private String nome;
 	private String cpf;
 	private String senha;
+	private int agencia;
 	
 	public Funcionario () {
 		
@@ -42,9 +43,14 @@ public abstract class Funcionario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	@Override
-	public String toString() {
-		return "Funcionario [cargo=" + cargo + ", nome=" + nome + ", cpf=" + cpf + ", senha=" + senha + "]";
+	public void setAgencia(int agencia) {
+		this.agencia = agencia;
+	}
+	public int getAgencia() {
+		return agencia;
+	}
+	public String reescreveFuncionario() {
+		return getCargo() + ";" + getNome() +  ";" + getSenha() +  ";" + getCpf() +  ";" + getAgencia();
 	}
 	
 }
