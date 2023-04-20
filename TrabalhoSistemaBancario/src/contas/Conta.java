@@ -1,7 +1,9 @@
 package contas;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import pessoas.Cliente;
 
 public abstract class Conta extends Cliente implements Operacoes, Comparable<Conta>{
@@ -48,13 +50,13 @@ public abstract class Conta extends Cliente implements Operacoes, Comparable<Con
 		
 		if (valor > 0 && this.getSaldo() >= valor) {
 			this.saldo -= valor;
-			System.out.println("\n" + valor + " foram sacados de sua conta com sucesso!");
+			System.out.println("\n" + NumberFormat.getCurrencyInstance().format(valor) + " foram sacados de sua conta com sucesso!");
 				if (this instanceof ContaCorrente) {
 				((ContaCorrente) this).setTributacaoSaque();
-				movimentacoes.add("Saque de: " + valor + "\nCom tributação: " + (valor + 0.10) );
+				movimentacoes.add("Saque de: " + NumberFormat.getCurrencyInstance().format(valor) + "\nCom tributação: " + NumberFormat.getCurrencyInstance().format((valor + 0.10)) );
 				 
 				}else {
-					movimentacoes.add("Saque de: " + valor);
+					movimentacoes.add("Saque de: " + NumberFormat.getCurrencyInstance().format(valor));
 				}
 		} else {
 			System.out.println("Saldo insuficiente");
@@ -67,12 +69,12 @@ public abstract class Conta extends Cliente implements Operacoes, Comparable<Con
 	public void depositar(double valor) {
 		if (valor > 0) {
 			this.saldo += valor;
-			System.out.println("\n" + valor + " foi adicionado ao seu saldo!");
+			System.out.println("\n" + NumberFormat.getCurrencyInstance().format(valor) + " foi adicionado ao seu saldo!");
 			if (this instanceof ContaCorrente) {
 				((ContaCorrente) this).setTributacaoDeposito();
-				movimentacoes.add("Deposito de: " + valor + "\nCom tributação: " + (valor - 0.10));
+				movimentacoes.add("Deposito de: " + NumberFormat.getCurrencyInstance().format(valor) + "\nCom tributação: " + NumberFormat.getCurrencyInstance().format((valor - 0.10)));
 			}else {
-				movimentacoes.add("Deposito de: " + valor);
+				movimentacoes.add("Deposito de: " + NumberFormat.getCurrencyInstance().format(valor));
 			}
 		} else {
 			System.out.println("Impossível depositar tal valor!");
@@ -84,12 +86,12 @@ public abstract class Conta extends Cliente implements Operacoes, Comparable<Con
 		this.saldo -= valor;
 		c.setSaldo(c.getSaldo() + valor);
 		
-			System.out.println("\n" + valor + " foram transferidos de sua conta com sucesso!");
+			System.out.println("\n" + NumberFormat.getCurrencyInstance().format(valor) + " foram transferidos de sua conta com sucesso!");
 			if (this instanceof ContaCorrente) {
 				((ContaCorrente) this).setTributacaoTransferencia();
-				movimentacoes.add("Transferencia de: " + valor + " para: " + c.getCpf() + "\nCom tributação: " + (valor + 0.20) );
+				movimentacoes.add("Transferencia de: " + NumberFormat.getCurrencyInstance().format(valor) + " para: " + c.getCpf() + "\nCom tributação: " + NumberFormat.getCurrencyInstance().format((valor + 0.20)) );
 			}else {
-				movimentacoes.add("Transferencia de: " + valor + " para: " + c.getCpf());
+				movimentacoes.add("Transferencia de: " + NumberFormat.getCurrencyInstance().format(valor) + " para: " + c.getCpf());
 			}
 		} else {
 			System.out.println("Saldo insuficiente");

@@ -29,34 +29,35 @@ public class Leitura {
 					String nome = valores[1];
 					String senha = valores[2];
 					String cpf = valores[3];
+					int ag = Integer.parseInt(valores[4]);
 					
 					switch (cargo) {
 						case "Conta Poupança":
-							ContaPoupanca cp = new ContaPoupanca(nome, senha, cpf, Integer.parseInt(valores[4]), Double.parseDouble(valores[5]));
+							ContaPoupanca cp = new ContaPoupanca(nome, senha, cpf, ag, Double.parseDouble(valores[5]));
 							contas.add(cp);
 							credenciais.put(cpf, senha);
 							validacao_conta.put(cpf, cp);
 							break;
 						case "Conta Corrente":
-							ContaCorrente cc = new ContaCorrente(nome, senha, cpf, Integer.parseInt(valores[4]), Double.parseDouble(valores[5]));
+							ContaCorrente cc = new ContaCorrente(nome, senha, cpf, ag, Double.parseDouble(valores[5]));
 							contas.add(cc);
 							credenciais.put(cpf, senha);
 							validacao_conta.put(cpf, cc);
 							break;
 						case "Gerente":
-							Gerente gerente = new Gerente(cargo, nome, senha, cpf, Integer.parseInt(valores[4]));
+							Gerente gerente = new Gerente(cargo, nome, senha, cpf, ag);
 							funcionarios.add(gerente);
 							credenciais.put(cpf, senha);
 							validacao_funcionario.put(cpf, gerente);
 							break;
 						case "Diretor":
-							Diretor diretor = new Diretor(nome, cpf, senha, cargo);
+							Diretor diretor = new Diretor(nome, cpf, senha, cargo, ag);
 							funcionarios.add(diretor);
 							credenciais.put(cpf, senha);
 							validacao_funcionario.put(cpf, diretor);
 							break;
 						case "Presidente":
-							Presidente presidente = new Presidente(cargo, nome, senha, cpf);
+							Presidente presidente = new Presidente(cargo, nome, senha, cpf, ag);
 							funcionarios.add(presidente);
 							credenciais.put(cpf, senha);
 							validacao_funcionario.put(cpf, presidente);

@@ -11,5 +11,5 @@ Conta Corrente;Rodrigo;006;219.932.120-78;4;8320
 Conta Corrente;William;007;872.895.900-07;4;10000
 Gerente;Carlos;679;847.450.560-79;3
 Gerente;William;007;872.895.900-07;4
-Diretor;Ciclano;000;449.326.700-36
-Presidente;Fulano;900;026.428.250-78
+Diretor;Ciclano;000;449.326.700-36;1
+Presidente;Fulano;900;026.428.250-78;2

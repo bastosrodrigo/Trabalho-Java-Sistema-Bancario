@@ -1,5 +1,6 @@
 package menu;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -7,7 +8,10 @@ import java.util.Scanner;
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import pessoas.Diretor;
 import pessoas.Funcionario;
+import pessoas.Gerente;
+import pessoas.Presidente;
 
 public class MenuInicial {
 
@@ -49,10 +53,10 @@ public class MenuInicial {
 				switch (validacao_funcionario.get(cpf).getCargo()) {
 
 				case "Presidente":
-					//
+					relatorios(null, validacao_funcionario.get(cpf));
 					break;
 				case "Diretor":
-					//
+					relatorios(null, validacao_funcionario.get(cpf));
 					break;
 				case "Gerente":
 					// Gerente sem conta
@@ -180,10 +184,10 @@ public class MenuInicial {
 
 		case 1:
 			if (c != null && f == null) {
-				System.out.println("Seu saldo é de: " + c.getSaldo() + "\n");
+				System.out.println("Seu saldo é de: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()) + "\n");
 				relatorios(c, null);
 			} else if (c != null && f != null) {
-				System.out.println("Seu saldo é de: " + c.getSaldo() + "\n");
+				System.out.println("Seu saldo é de: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()) + "\n");
 				relatorios(c, f);
 			} else {
 				System.out.println("Você não possui conta cadastrada em seu CPF.");
@@ -198,13 +202,10 @@ public class MenuInicial {
 
 				System.out.println("\n|*********************** TRIBUTAÇÕES *******************|");
 				System.out.println("|========================================================");
-				System.out
-						.println("|	Tributação de saques: " + ((ContaCorrente) c).getTributacaoSaque() + "			|");
-				System.out.println(
-						"|	Tributação de depósitos: " + ((ContaCorrente) c).getTributacaoDeposito() + "			|");
-				System.out.println("|	Tributação de transferencias: "
-						+ ((ContaCorrente) c).getTributacaoTransferencia() + "		|");
-				System.out.println("|	Total de tributação: " + totalT + "			|");
+				System.out.println("|	Tributação de saques: " + ((ContaCorrente) c).getTributacaoSaque() + "			|");
+				System.out.println("|	Tributação de depósitos: " + ((ContaCorrente) c).getTributacaoDeposito() + "			|");
+				System.out.println("|	Tributação de transferencias: " + ((ContaCorrente) c).getTributacaoTransferencia() + "		|");
+				System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
 				System.out.println("|========================================================\n\n");
 			} else {
 				System.out.println("Opção não disponível.");
@@ -220,7 +221,7 @@ public class MenuInicial {
 				System.out.println("Digite o valor a ser aplicado:");
 				double valor = scanner.nextDouble();
 				double rendimento = valor * (dias / 30) * 0.01;
-				System.out.println("O rendimento será de: " + rendimento);
+				System.out.println("O rendimento será de: " + NumberFormat.getCurrencyInstance().format(rendimento));
 				break;
 			} else {
 				System.out.println("Opção não disponível.");
@@ -228,18 +229,39 @@ public class MenuInicial {
 			retornoRelatorio(c, f);
 
 		case 4:
-			//
+			if (f instanceof Gerente || f instanceof Presidente || f instanceof Diretor) {
+				((Gerente) f).totalContas(getContas());
+				retornoRelatorio(c, f); 
+			}else {
+				System.out.println("Erro! Opção inválida!");
+				retornoRelatorio(c, f);
+			}
 			retornoRelatorio(c, f);
 			break;
 		case 5:
-			//
-
+			if (f instanceof Diretor || f instanceof Presidente) {
+				((Diretor) f).totalInfo(getContas());
+				System.out.print("Aperte ENTER para voltar! "); 
+				scanner.nextLine();
+				retornoRelatorio(c, f);
+			}else {
+				System.out.println("Erro! Opção inválida!\n");
+				System.out.print("Aperte ENTER para voltar! "); 
+				scanner.nextLine();
+				scanner.nextLine();
+				retornoRelatorio(c, f);
+			}
 			retornoRelatorio(c, f);
 			break;
 		case 6:
-			//
-
-			retornoRelatorio(c, f);
+			if (f instanceof Presidente) {
+				((Presidente) f).totalCapital(getContas());
+				retornoRelatorio(c, f);
+			}else {
+				System.out.println("Erro! Opção inválida!");
+				retornoRelatorio(c, f);
+			}
+			
 			break;
 		case 7:
 			if (c != null && f == null) {
@@ -315,5 +337,4 @@ public class MenuInicial {
 	public static void setValidacao_funcionario(Map<String, Funcionario> validacao_funcionario) {
 		MenuInicial.validacao_funcionario = validacao_funcionario;
 	}
-
 }
