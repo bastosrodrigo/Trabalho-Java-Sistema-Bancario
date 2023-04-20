@@ -20,24 +20,23 @@ public class MenuInicial {
 	private static Map<String, String> credenciais;
 	private static Map<String, Conta> validacao_conta;
 	private static Map<String, Funcionario> validacao_funcionario;
-
+	Scanner scanner = new Scanner(System.in);
 	public void menuInicial(List<Conta> contas, List<Funcionario> funcionarios, Map<String, String> credenciais,
-			Map<String, Conta> validacao_conta, Map<String, Funcionario> validacao_funcionario) {
-		Scanner scanner = new Scanner(System.in);
+			Map<String, Conta> validacao_conta, Map<String, Funcionario> validacao_funcionario){
 
 		MenuInicial.setContas(contas);
 		MenuInicial.setFuncionarios(funcionarios);
 		MenuInicial.setCredenciais(credenciais);
 		MenuInicial.setValidacao_conta(validacao_conta);
 		MenuInicial.setValidacao_funcionario(validacao_funcionario);
-
+		Scanner scannerLogin = new Scanner(System.in);
 		System.out.println("╔════════════════════════════╗");
 		System.out.println("║   Digite seu CPF e SENHA:  ║");
 		System.out.println("╚════════════════════════════╝");
 		System.out.print("CPF: ");
-		String cpf = scanner.nextLine();
+		String cpf = scannerLogin.nextLine();
 		System.out.print("SENHA: ");
-		String senha = scanner.nextLine();
+		String senha = scannerLogin.nextLine();
 
 		if (credenciais.containsKey(cpf) && credenciais.get(cpf).compareTo(senha) == 0) {
 			System.out.println("Login efetuado com sucesso!");
@@ -68,17 +67,23 @@ public class MenuInicial {
 
 		} else {
 			System.out.println("Erro! CPF ou SENHA incorreta!");
+			//Scanner scannerNext = new Scanner (System.in);
+			System.out.println("Pressione ENTER para continuar.");
+			scanner.nextLine();
+			menuInicial(contas, funcionarios, credenciais, validacao_conta, validacao_funcionario);
+			
 		}
 	}
 
+
 	public void menuCliente(Conta c, Map<String, Conta> validacao_conta, Funcionario f) {
 
-		Scanner scanner = new Scanner(System.in);
+
 		System.out.println("\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ MENU ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
 		System.out.println("╔═══════════════════════════════════════════╗");
 		System.out.println("║ 1 -	Movimentações na conta		    ║");
 		System.out.println("║ 2  - 	Relatórios			    ║");
-		System.out.println("║ 3  -	Voltar ao login		    ║");
+		System.out.println("║ 3  -	Voltar ao login			    ║");
 		System.out.println("║ 4  -	Encerrar o programa		    ║");
 		System.out.println("╚═══════════════════════════════════════════╝");
 		System.out.print("\n\nDigite a opção desejada: ");
@@ -107,7 +112,7 @@ public class MenuInicial {
 	}
 
 	public void movimentacoes(Conta c, Map<String, Conta> validacao_conta, Funcionario f) {
-		Scanner scanner = new Scanner(System.in);
+
 		System.out.println("\n|*************** MENU CONTA - MOVIMENTAÇÕES ************|");
 		System.out.println("|========================================================");
 		System.out.println("| 1 -	Saque						|");
@@ -164,18 +169,18 @@ public class MenuInicial {
 
 	public void relatorios(Conta c, Funcionario f) {
 
-		Scanner scanner = new Scanner(System.in);
+		Scanner scannerRel = new Scanner(System.in);
 
 		System.out.println("\n|*********************** RELATÓRIOS ********************|");
 		System.out.println("|========================================================");
 		System.out.println("| 1 -	Saldo						|");
-		System.out.println("| 2  - 	Relatório de tributações	|");
-		System.out.println("| 3  -	Relatório de rendimentos	|");
-		System.out.println("| 4  -	Relatório de contas da agência						|");
-		System.out.println("| 5  -	Relatório de informações						|");
-		System.out.println("| 6  -	Relatório de capital						|");
+		System.out.println("| 2  - 	Relatório de tributações			|");
+		System.out.println("| 3  -	Relatório de rendimentos			|");
+		System.out.println("| 4  -	Relatório de contas da agência			|");
+		System.out.println("| 5  -	Relatório de informações			|");
+		System.out.println("| 6  -	Relatório de capital				|");
 		System.out.println("| 7  -	Voltar						|");
-		System.out.println("|========================================================");
+		System.out.println("|=======================================================|");
 		System.out.print("\n\nDigite a opção desejada: ");
 
 		int opcaoRelatorio = scanner.nextInt();
@@ -185,12 +190,18 @@ public class MenuInicial {
 		case 1:
 			if (c != null && f == null) {
 				System.out.println("Seu saldo é de: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()) + "\n");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				relatorios(c, null);
 			} else if (c != null && f != null) {
 				System.out.println("Seu saldo é de: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()) + "\n");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				relatorios(c, f);
 			} else {
 				System.out.println("Você não possui conta cadastrada em seu CPF.");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				relatorios(null, f);
 			}
 			break;
@@ -209,6 +220,8 @@ public class MenuInicial {
 				System.out.println("|========================================================\n\n");
 			} else {
 				System.out.println("Opção não disponível.");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 			}
 			retornoRelatorio(c, f);
 
@@ -222,18 +235,27 @@ public class MenuInicial {
 				double valor = scanner.nextDouble();
 				double rendimento = valor * (dias / 30) * 0.01;
 				System.out.println("O rendimento será de: " + NumberFormat.getCurrencyInstance().format(rendimento));
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
+				retornoRelatorio(c, f);
 				break;
 			} else {
 				System.out.println("Opção não disponível.");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
+				retornoRelatorio(c, f);
 			}
-			retornoRelatorio(c, f);
 
 		case 4:
 			if (f instanceof Gerente || f instanceof Presidente || f instanceof Diretor) {
 				((Gerente) f).totalContas(getContas());
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				retornoRelatorio(c, f); 
 			}else {
 				System.out.println("Erro! Opção inválida!");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}
 			retornoRelatorio(c, f);
@@ -241,14 +263,13 @@ public class MenuInicial {
 		case 5:
 			if (f instanceof Diretor || f instanceof Presidente) {
 				((Diretor) f).totalInfo(getContas());
-				System.out.print("Aperte ENTER para voltar! "); 
-				scanner.nextLine();
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}else {
 				System.out.println("Erro! Opção inválida!\n");
-				System.out.print("Aperte ENTER para voltar! "); 
-				scanner.nextLine();
-				scanner.nextLine();
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}
 			retornoRelatorio(c, f);
@@ -256,9 +277,13 @@ public class MenuInicial {
 		case 6:
 			if (f instanceof Presidente) {
 				((Presidente) f).totalCapital(getContas());
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}else {
 				System.out.println("Erro! Opção inválida!");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}
 			
@@ -281,20 +306,32 @@ public class MenuInicial {
 	}
 
 	public void retornoRelatorio(Conta c, Funcionario f) {
+
+
 		if (c != null && f == null) {
 			relatorios(c, null);
 		} else if (c != null && f != null) {
 			relatorios(c, f);
+			System.out.println("Pressione ENTER para continuar.");
+			scanner.nextLine();
 		} else {
 			relatorios(null, f);
+			System.out.println("Pressione ENTER para continuar.");
+			scanner.nextLine();
 		}
 	}
 
 	public void retornoMovimentacoes(Conta c, Funcionario f, Map<String, Conta> validacao_conta) {
 		if (f == null) {
+
+			
 			movimentacoes(c, getValidacao_conta(), null);
+			System.out.println("Pressione ENTER para continuar.");
+			scanner.nextLine();
 		} else {
 			movimentacoes(c, getValidacao_conta(), f);
+			System.out.println("Pressione ENTER para continuar.");
+			scanner.nextLine();
 		}
 	}
 
