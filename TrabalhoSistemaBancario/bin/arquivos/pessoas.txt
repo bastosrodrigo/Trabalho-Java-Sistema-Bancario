@@ -1,5 +1,5 @@
 TIPO;NOME;SENHA;CPF;AGENCIA;SALDO
-Conta Poupança;João;123;772.398.320-40;1;48750.0
+Conta Poupança;João;123;772.398.320-40;1;547750.0
 Conta Poupança;Maria;456;866.165.500-52;2;20300.0
 Conta Poupança;Vitória;789;324.451.390-58;3;1350.0
 Conta Poupança;Roberto;001;688.405.750-57;4;100.0

@@ -89,7 +89,7 @@ public class MenuInicial {
 		System.out.println(flReset);
 		
 		if (credenciais.containsKey(cpf) && credenciais.get(cpf).compareTo(senha) == 0) {
-			System.out.println(fBranco + lVerde + "Login efetuado com sucesso!" + flReset);
+			System.out.println("Login efetuado com sucesso!");
 
 			if (validacao_conta.containsKey(cpf)) {
 				if (validacao_funcionario.containsKey(cpf)) {
@@ -168,6 +168,8 @@ public class MenuInicial {
 
 	public void movimentacoes(Conta c, Map<String, Conta> validacao_conta, Funcionario f) {
 
+		Scanner scannerMov = new Scanner(System.in);
+		
 		System.out.println("\n|*************** MENU CONTA - MOVIMENTAÇÕES ************|");
 		System.out.println("|========================================================");
 		System.out.println("| 1 -	Saque						|");
@@ -184,13 +186,23 @@ public class MenuInicial {
 		case 1:
 			System.out.println("Digite o valor que deseja sacar: ");
 			double valorSaque = scanner.nextDouble();
-			c.sacar(valorSaque);
+				if (c.getSaldo() >= valorSaque) {
+					c.sacar(valorSaque);
+					System.out.println("Saque efetuado com sucesso! Pressione ENTER para continuar.");
+					scannerMov.nextLine();
+				}else {
+					System.out.println("Saldo insuficiente");
+					System.out.println("Pressione ENTER para continuar.");
+					scannerMov.nextLine();
+				}
 			retornoMovimentacoes(c, f, validacao_conta);
 			break;
 		case 2:
 			System.out.println("Digite o valor que deseja depositar: ");
 			double valorDeposito = scanner.nextDouble();
 			c.depositar(valorDeposito);
+			System.out.println("Pressione ENTER para continuar.");
+			scannerMov.nextLine();
 			retornoMovimentacoes(c, f, validacao_conta);
 			break;
 		case 3:
@@ -202,14 +214,20 @@ public class MenuInicial {
 
 			if (validacao_conta.containsKey(destinatario)) {
 				c.transferir(valorTransferencia, validacao_conta.get(destinatario));
+				System.out.println("Pressione ENTER para continuar.");
+				scannerMov.nextLine();
 			} else {
 				System.out.println("CPF inválido ou não cadastrado. Tente novamente.");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerMov.nextLine();
 			}
 
 			retornoMovimentacoes(c, f, validacao_conta);
 			break;
 		case 4:
 			c.extrato();
+			System.out.println("Pressione ENTER para continuar.");
+			scannerMov.nextLine();
 			retornoMovimentacoes(c, f, validacao_conta);
 			break;
 		case 5:
@@ -262,7 +280,6 @@ public class MenuInicial {
 			break;
 		case 2:
 			if (c instanceof ContaCorrente) {
-
 				double totalT = ((ContaCorrente) c).getTributacaoSaque() + ((ContaCorrente) c).getTributacaoDeposito()
 						+ ((ContaCorrente) c).getTributacaoTransferencia();
 
@@ -273,10 +290,13 @@ public class MenuInicial {
 				System.out.println("|	Tributação de transferencias: " + ((ContaCorrente) c).getTributacaoTransferencia() + "		|");
 				System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
 				System.out.println("|========================================================\n\n");
-			} else {
-				System.out.println("Opção não disponível.");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
+			} else {
+				System.out.println("Você não possui acesso a essa função.");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
+				
 			}
 			retornoRelatorio(c, f);
 
@@ -295,7 +315,7 @@ public class MenuInicial {
 				retornoRelatorio(c, f);
 				break;
 			} else {
-				System.out.println("Opção não disponível.");
+				System.out.println("Você não possui acesso a essa função.");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
@@ -308,7 +328,7 @@ public class MenuInicial {
 				scannerRel.nextLine();
 				retornoRelatorio(c, f); 
 			}else {
-				System.out.println("Erro! Opção inválida!");
+				System.out.println("Você não possui acesso a essa função.");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
@@ -322,7 +342,7 @@ public class MenuInicial {
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}else {
-				System.out.println("Erro! Opção inválida!\n");
+				System.out.println("Você não possui acesso a essa função.");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
@@ -336,7 +356,7 @@ public class MenuInicial {
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}else {
-				System.out.println("Erro! Opção inválida!");
+				System.out.println("Você não possui acesso a essa função.");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
@@ -365,6 +385,8 @@ public class MenuInicial {
 
 		if (c != null && f == null) {
 			relatorios(c, null);
+			System.out.println("Pressione ENTER para continuar.");
+			scanner.nextLine();
 		} else if (c != null && f != null) {
 			relatorios(c, f);
 			System.out.println("Pressione ENTER para continuar.");
@@ -429,4 +451,5 @@ public class MenuInicial {
 	public static void setValidacao_funcionario(Map<String, Funcionario> validacao_funcionario) {
 		MenuInicial.validacao_funcionario = validacao_funcionario;
 	}
+	
 }
