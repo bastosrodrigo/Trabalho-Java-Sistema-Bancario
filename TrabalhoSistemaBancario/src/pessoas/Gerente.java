@@ -16,13 +16,13 @@ public class Gerente extends Funcionario {
 		setAgencia(agencia);
 	}
 
-	public void totalContas(List<Conta> contas) {
+	public int totalContas(List<Conta> contas) {
 		int numeroContas = 0;
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getAgencia() == getAgencia()) {
 				numeroContas++;
 			}
 		}
-		System.out.println("\nO total de contas na sua agência é: " + numeroContas + "\n");
+		return numeroContas;
 	}
 }

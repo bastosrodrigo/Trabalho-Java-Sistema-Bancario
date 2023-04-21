@@ -5,7 +5,6 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
@@ -84,7 +83,7 @@ public class MenuInicial {
 		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣷⣄⠄⢰⣶⣿⣿⣿⡿⠃⠺⠶⠟⠄⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
 		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⡟⠄⣸⣿⡿⠟⠋⢀⣰⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
 		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⠄⠄⣉⣀⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿" + flReset);
-		System.out.println(lVerde + fBranco + " H E R M E T I U S   B A N K  " + flReset);
+		System.out.println(lVerde + fAzul + " H E R M E T I U S   B A N K  " + flReset);
 		System.out.println(" ");
 		System.out.println(lVerde + fBranco + "╔════════════════════════════╗");
 		System.out.println("║   Digite CPF e SENHA:      ║");
@@ -459,9 +458,14 @@ public class MenuInicial {
 
 		case 4:
 			if (f instanceof Gerente || f instanceof Presidente || f instanceof Diretor) {
-				((Gerente) f).totalContas(getContas());
+				System.out.println ("\nO total de contas na sua agência é: " + ((Gerente) f).totalContas(getContas()) + "\n");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
+				try {
+					Gravacao.contasDaAgencia (getContas(), f);
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gerar o arquivo.");
+				}
 				retornoRelatorio(c, f); 
 			}else {
 				System.out.println("Você não possui acesso a essa função.");
@@ -495,9 +499,14 @@ public class MenuInicial {
 			break;
 		case 6:
 			if (f instanceof Presidente) {
-				((Presidente) f).totalCapital(getContas());
+				System.out.println("\nO total do capital é: " + ((Presidente) f).totalCapital(getContas()) + "\n");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
+				try {
+					Gravacao.relTotalCapital (getContas(), f);
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gerar o arquivo.");
+				}
 				retornoRelatorio(c, f);
 			}else {
 				System.out.println("Você não possui acesso a essa função.");

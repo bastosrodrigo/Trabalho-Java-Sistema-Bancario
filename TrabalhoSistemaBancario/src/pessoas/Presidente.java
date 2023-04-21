@@ -14,11 +14,12 @@ public class Presidente extends Diretor{
 		super(cargo, nome, senha, cpf, agencia);
 	}
 	
-	public void totalCapital(List<Conta> contas) {
-		int totalCapital = 0;
+	public String totalCapital(List<Conta> contas) {
+		double totalCapital = 0;
 		for (int i = 0; i < contas.size(); i++) {
 			totalCapital += contas.get(i).getSaldo();
+			
 		}
-		System.out.println("\nO total do capital é: " + NumberFormat.getCurrencyInstance().format(totalCapital) + "\n");
+		return NumberFormat.getCurrencyInstance().format(totalCapital);
 	}
 }

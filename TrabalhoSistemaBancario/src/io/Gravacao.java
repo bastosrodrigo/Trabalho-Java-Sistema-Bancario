@@ -13,6 +13,8 @@ import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
 import pessoas.Funcionario;
+import pessoas.Gerente;
+import pessoas.Presidente;
 
 public class Gravacao {
 	
@@ -34,7 +36,7 @@ public class Gravacao {
 		buffWrite.append("|*********************** MOVIMENTAÇÕES TOTAIS ********************|\n");
 		
 		for (int i = 0; i < lista_contas.size(); i++) {
-			if(lista_contas.get(i).getMovimentacoes() != null) {
+			if(lista_contas.size() != 0) {
 				buffWrite.append("ID: " + lista_contas.get(i).getId() + " " + lista_contas.get(i).getMovimentacoes() + "\n");
 			}
 		}
@@ -109,9 +111,38 @@ public class Gravacao {
 	}
 	
 	// Gera relatório de total de contas da agência .txt
+	public static void contasDaAgencia (List<Conta> contas, Funcionario f) throws IOException {
+		LocalDateTime data = LocalDateTime.now(); 
+		DateTimeFormatter formatar = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+        String dataFormatada = data.format(formatar);
+	
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "RelNumeroDeContas_" + dataFormatada + ".txt", true));
+        
+        buffWrite.append("|***************** RELATÓRIO DE NÚMERO DE CONTAS **************|\n");
+        buffWrite.append("Data e hora do relatório: " + dataFormatada + "\n");
+        buffWrite.append("Número de contas: " + ((Gerente) f).totalContas(contas));
+        
+        buffWrite.close();
+	
+	}
+	
 	
 	// Gera relatório de capital .txt
+	public static void relTotalCapital (List<Conta> contas, Funcionario f) throws IOException{
+		LocalDateTime data = LocalDateTime.now();
+		DateTimeFormatter formatar = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+		String dataFormatada = data.format(formatar);
+		
+		BufferedWriter buffWrite = new BufferedWriter ( new FileWriter ("./src/arquivos/" + "RelTotalCapital" + dataFormatada + ".txt", true));
+		
+		buffWrite.append("|***************** RELATÓRIO DE TOTAL DE CAPITAL **************|\n");
+        buffWrite.append("Data e hora do relatório: " + dataFormatada + "\n");
+        buffWrite.append("Total de capital do banco: " + ((Presidente) f).totalCapital(contas));
+        
+        buffWrite.close();
 	
+		
+	}
 	
 	// Atualiza o pessoas.txt
 	public static void pessoas(List<Conta> contas, List<Funcionario> funcionarios) throws IOException{

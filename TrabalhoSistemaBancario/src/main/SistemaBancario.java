@@ -1,21 +1,24 @@
 package main;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import contas.Conta;
-import io.Gravacao;
 import io.Leitura;
 import menu.MenuInicial;
 import pessoas.Funcionario;
 
 public class SistemaBancario {
-
+	
 	public static void main(String[] args) throws IOException {
-
+		
+		Locale.setDefault(Locale.US);
+		
 		List<Conta> contas = new ArrayList<>(); // guarda todas as contas/clientes
 		List<Funcionario> funcionarios = new ArrayList<>(); // guarda todos os funcionários
 		Map<String, String> credenciais = new HashMap<>(); // guarda CPF + senha
