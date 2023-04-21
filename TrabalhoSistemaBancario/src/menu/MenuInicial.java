@@ -23,6 +23,9 @@ public class MenuInicial {
 	private static Map<String, Conta> validacao_conta;
 	private static Map<String, Funcionario> validacao_funcionario;
 	Scanner scanner = new Scanner(System.in);
+	
+	
+	
 	public void menuInicial(List<Conta> contas, List<Funcionario> funcionarios, Map<String, String> credenciais,
 			Map<String, Conta> validacao_conta, Map<String, Funcionario> validacao_funcionario){
 		
@@ -55,13 +58,17 @@ public class MenuInicial {
 		
 		String flReset = "\u001B[0m";// reseta cores de LINHA E FUNDO simultaneamente
 		
+		// Guarda todas as listas/maps do SistemaBancario para facilitar acesso
+		setContas(contas);
+		setFuncionarios(funcionarios);
+		setCredenciais(credenciais);
+		setValidacao_conta(validacao_conta);
+		setValidacao_funcionario(validacao_funcionario);
 		
-		MenuInicial.setContas(contas);
-		MenuInicial.setFuncionarios(funcionarios);
-		MenuInicial.setCredenciais(credenciais);
-		MenuInicial.setValidacao_conta(validacao_conta);
-		MenuInicial.setValidacao_funcionario(validacao_funcionario);
+		
 		Scanner scannerLogin = new Scanner(System.in);
+		
+		
 		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
 		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⣿⣿⠟⢋⣡⣤⣤⣤⣌⡉⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
 		System.out.println(lAzul + fPreto + "⣿⣿⠟⢛⣛⣛⣁⠰⠿⢿⣿⣿⣿⣿⣿⣦⠄⢀⣤⣤⣄⡙⠻⣿⣿⣿⣿⣿⣿⣿");
@@ -83,33 +90,36 @@ public class MenuInicial {
 		System.out.println("║   Digite CPF e SENHA:      ║");
 		System.out.println("╚════════════════════════════╝");
 		System.out.print(lVerde + fBranco + "CPF: " + flReset + lBranco + fVerde);
+		
 		String cpf = scannerLogin.nextLine();
+		
 		System.out.print(lVerde + fBranco + "SENHA: " + flReset + lBranco + fVerde);
 		String senha = scannerLogin.nextLine();
+		
 		System.out.println(flReset);
 		
+		// Validação de login
 		if (credenciais.containsKey(cpf) && credenciais.get(cpf).compareTo(senha) == 0) {
 			System.out.println("Login efetuado com sucesso!");
 
-			if (validacao_conta.containsKey(cpf)) {
-				if (validacao_funcionario.containsKey(cpf)) {
+			if (validacao_conta.containsKey(cpf)) { // verifica se esse CPF está atrelado a uma conta
+				if (validacao_funcionario.containsKey(cpf)) { // e se também está atrelado a um funcionário
 					menuCliente(validacao_conta.get(cpf), validacao_conta, validacao_funcionario.get(cpf));
 				} else {
 					menuCliente(validacao_conta.get(cpf), validacao_conta, null);
 				}
 
 			} else {
-				switch (validacao_funcionario.get(cpf).getCargo()) {
+				switch (validacao_funcionario.get(cpf).getCargo()) { // caso só estiver atrelado a um funcionário
 
 				case "Presidente":
-					relatorios(null, validacao_funcionario.get(cpf));
+					relatoriosFuncionarios(null, validacao_funcionario.get(cpf));
 					break;
 				case "Diretor":
-					relatorios(null, validacao_funcionario.get(cpf));
+					relatoriosFuncionarios(null, validacao_funcionario.get(cpf));
 					break;
 				case "Gerente":
-					// Gerente sem conta
-					relatorios(null, validacao_funcionario.get(cpf));
+					relatoriosFuncionarios(null, validacao_funcionario.get(cpf));
 					break;
 
 				}
@@ -117,7 +127,6 @@ public class MenuInicial {
 
 		} else {
 			System.out.println(fVermelho + lBranco + "Erro! CPF e/ou SENHA incorretos!" + flReset);
-			//Scanner scannerNext = new Scanner (System.in);
 			System.out.println("Pressione ENTER para continuar.");
 			scanner.nextLine();
 			menuInicial(contas, funcionarios, credenciais, validacao_conta, validacao_funcionario);
@@ -127,11 +136,22 @@ public class MenuInicial {
 
 
 	public void menuCliente(Conta c, Map<String, Conta> validacao_conta, Funcionario f) {
+		
+		String cargo;
+		String nome;
 
+		if (f != null) {
+			cargo = f.getCargo();
+			nome = f.getNome();
+		} else {
+			cargo = "Cliente";
+			nome = c.getNome();
+		}
 
 		System.out.println("\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ MENU ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println("    Seja bem-vindo(a), " + cargo + " " + nome + "     ");
 		System.out.println("╔═══════════════════════════════════════════╗");
-		System.out.println("║ 1 -	Movimentações na conta		    ║");
+		System.out.println("║ 1  -	Movimentações na conta		    ║");
 		System.out.println("║ 2  - 	Relatórios			    ║");
 		System.out.println("║ 3  -	Voltar ao login			    ║");
 		System.out.println("║ 4  -	Encerrar o programa		    ║");
@@ -144,7 +164,11 @@ public class MenuInicial {
 			movimentacoes(c, validacao_conta, f);
 			break;
 		case 2:
-			relatorios(c, f);
+			if (f == null) {
+				relatoriosClientes(c);
+			} else {
+				relatoriosFuncionarios(c, f);
+			}
 			break;
 		case 3:
 			menuInicial(MenuInicial.getContas(), MenuInicial.getFuncionarios(), MenuInicial.getCredenciais(),
@@ -152,11 +176,19 @@ public class MenuInicial {
 			break;
 		case 4:
 			System.out.println("Aplicação encerrada.");
-			try {
-				Gravacao.pessoas(getContas(), getFuncionarios());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
+				try {
+					Gravacao.pessoas(getContas(), getFuncionarios());
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gravar o arquivo.");
+				}
+				
+				try {
+					Gravacao.movimentacoes(getContas());
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gravar o arquivo.");
+				}
+				
 			System.exit(0);
 			break;
 		default:
@@ -188,7 +220,7 @@ public class MenuInicial {
 			double valorSaque = scanner.nextDouble();
 				if (c.getSaldo() >= valorSaque) {
 					c.sacar(valorSaque);
-					System.out.println("Saque efetuado com sucesso! Pressione ENTER para continuar.");
+					System.out.println("Pressione ENTER para continuar.");
 					scannerMov.nextLine();
 				}else {
 					System.out.println("Saldo insuficiente");
@@ -225,7 +257,9 @@ public class MenuInicial {
 			retornoMovimentacoes(c, f, validacao_conta);
 			break;
 		case 4:
+			System.out.println("\n|********************* EXTRATO ******************|\n");
 			c.extrato();
+			System.out.println("\n|================================================|\n");
 			System.out.println("Pressione ENTER para continuar.");
 			scannerMov.nextLine();
 			retornoMovimentacoes(c, f, validacao_conta);
@@ -239,13 +273,101 @@ public class MenuInicial {
 			break;
 		}
 	}
-
-	public void relatorios(Conta c, Funcionario f) {
-
+	
+	public void relatoriosClientes(Conta c) {
+		
 		Scanner scannerRel = new Scanner(System.in);
 
 		System.out.println("\n|*********************** RELATÓRIOS ********************|");
-		System.out.println("|========================================================");
+		System.out.println("|=======================================================|");
+		System.out.println("| 1 -	Saldo						|");
+		System.out.println("| 2  - 	Relatório de tributações			|");
+		System.out.println("| 3  -	Relatório de rendimentos			|");
+		System.out.println("| 4  -	Voltar						|");
+		System.out.println("|=======================================================|");
+		System.out.print("\n\nDigite a opção desejada: ");
+		
+		int opcaoRelatorio = scanner.nextInt();
+		
+		switch (opcaoRelatorio) {
+		case 1:
+			System.out.println("Seu saldo é de: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()) + "\n");
+			System.out.println("Pressione ENTER para continuar.");
+			scannerRel.nextLine();
+			relatoriosClientes(c);
+			break;
+		case 2:
+			if (c instanceof ContaCorrente) {
+				double totalT = ((ContaCorrente) c).getTributacaoSaque() + ((ContaCorrente) c).getTributacaoDeposito()
+						+ ((ContaCorrente) c).getTributacaoTransferencia();
+
+				System.out.println("\n|*********************** TRIBUTAÇÕES *******************|");
+				System.out.println("|========================================================");
+				System.out.println("|	Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "			|");
+				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
+				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
+				System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
+				System.out.println("|========================================================\n\n");
+				
+				try {
+					Gravacao.tributacoes(c);
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gerar o arquivo.");
+				}
+				
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
+			} else {
+				System.out.println("Você não possui acesso a essa função.");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
+				
+			}
+			relatoriosClientes(c);
+			break;
+		case 3:
+			if (c instanceof ContaPoupanca) {
+				System.out.println("Digite a quantidade de dias da aplicação:");
+				int dias = scanner.nextInt();
+				System.out.println("Digite o valor a ser aplicado:");
+				double valor = scanner.nextDouble();
+				double rendimento = valor * (dias / 30) * 0.01;
+				System.out.println("O rendimento será de: " + NumberFormat.getCurrencyInstance().format(rendimento));
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
+				relatoriosClientes(c);
+				break;
+			} else {
+				System.out.println("Você não possui acesso a essa função.");
+				System.out.println("Pressione ENTER para continuar.");
+				scannerRel.nextLine();
+				relatoriosClientes(c);
+			}
+			break;
+		case 4:
+			menuCliente(c, getValidacao_conta(), null);
+			break;
+		default:
+			System.out.println("Opção inválida. Digite novamente:");
+			relatoriosClientes(c);
+			break;
+		}
+	
+	}
+
+	public void relatoriosFuncionarios(Conta c, Funcionario f) {
+		
+		Scanner scannerRel = new Scanner(System.in);
+		String cargo;
+		String nome;
+
+		System.out.println("\n|*********************** RELATÓRIOS ********************|");
+		if (f != null && c == null) {
+			cargo = f.getCargo();
+			nome = f.getNome();
+			System.out.println("    	  Seja bem-vindo(a), " + cargo + " " + nome + "     ");
+		}
+		System.out.println("|=======================================================|");
 		System.out.println("| 1 -	Saldo						|");
 		System.out.println("| 2  - 	Relatório de tributações			|");
 		System.out.println("| 3  -	Relatório de rendimentos			|");
@@ -265,17 +387,17 @@ public class MenuInicial {
 				System.out.println("Seu saldo é de: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()) + "\n");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
-				relatorios(c, null);
+				relatoriosFuncionarios(c, null);
 			} else if (c != null && f != null) {
 				System.out.println("Seu saldo é de: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()) + "\n");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
-				relatorios(c, f);
+				relatoriosFuncionarios(c, f);
 			} else {
 				System.out.println("Você não possui conta cadastrada em seu CPF.");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
-				relatorios(null, f);
+				relatoriosFuncionarios(null, f);
 			}
 			break;
 		case 2:
@@ -285,11 +407,18 @@ public class MenuInicial {
 
 				System.out.println("\n|*********************** TRIBUTAÇÕES *******************|");
 				System.out.println("|========================================================");
-				System.out.println("|	Tributação de saques: " + ((ContaCorrente) c).getTributacaoSaque() + "			|");
-				System.out.println("|	Tributação de depósitos: " + ((ContaCorrente) c).getTributacaoDeposito() + "			|");
-				System.out.println("|	Tributação de transferencias: " + ((ContaCorrente) c).getTributacaoTransferencia() + "		|");
+				System.out.println("|	Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "			|");
+				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
+				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
 				System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
 				System.out.println("|========================================================\n\n");
+				
+				try {
+					Gravacao.tributacoes(c);
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gerar o arquivo.");
+				}
+				
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 			} else {
@@ -311,15 +440,22 @@ public class MenuInicial {
 				double rendimento = valor * (dias / 30) * 0.01;
 				System.out.println("O rendimento será de: " + NumberFormat.getCurrencyInstance().format(rendimento));
 				System.out.println("Pressione ENTER para continuar.");
+				
+				try {
+					Gravacao.rendimentos(dias, valor, rendimento, c);
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gerar o arquivo.");
+				}
+				
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
-				break;
 			} else {
 				System.out.println("Você não possui acesso a essa função.");
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			}
+			break;
 
 		case 4:
 			if (f instanceof Gerente || f instanceof Presidente || f instanceof Diretor) {
@@ -338,6 +474,14 @@ public class MenuInicial {
 		case 5:
 			if (f instanceof Diretor || f instanceof Presidente) {
 				((Diretor) f).totalInfo(getContas());
+				
+				
+				try {
+					Gravacao.totalInfo(getContas());
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gerar o arquivo.");
+				}
+				
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
@@ -384,15 +528,15 @@ public class MenuInicial {
 
 
 		if (c != null && f == null) {
-			relatorios(c, null);
+			relatoriosFuncionarios(c, null);
 			System.out.println("Pressione ENTER para continuar.");
 			scanner.nextLine();
 		} else if (c != null && f != null) {
-			relatorios(c, f);
+			relatoriosFuncionarios(c, f);
 			System.out.println("Pressione ENTER para continuar.");
 			scanner.nextLine();
 		} else {
-			relatorios(null, f);
+			relatoriosFuncionarios(null, f);
 			System.out.println("Pressione ENTER para continuar.");
 			scanner.nextLine();
 		}

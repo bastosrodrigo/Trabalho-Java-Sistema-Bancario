@@ -19,6 +19,6 @@ public class Presidente extends Diretor{
 		for (int i = 0; i < contas.size(); i++) {
 			totalCapital += contas.get(i).getSaldo();
 		}
-		System.out.println("O total do capital é: " + NumberFormat.getCurrencyInstance().format(totalCapital));
+		System.out.println("\nO total do capital é: " + NumberFormat.getCurrencyInstance().format(totalCapital) + "\n");
 	}
 }

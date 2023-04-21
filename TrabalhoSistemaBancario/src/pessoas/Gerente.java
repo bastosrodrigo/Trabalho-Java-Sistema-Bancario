@@ -23,6 +23,6 @@ public class Gerente extends Funcionario {
 				numeroContas++;
 			}
 		}
-		System.out.println("O total de contas na sua agência é: " + numeroContas);
+		System.out.println("\nO total de contas na sua agência é: " + numeroContas + "\n");
 	}
 }

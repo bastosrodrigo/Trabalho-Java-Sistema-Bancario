@@ -1,4 +1,0 @@
-Saque de: R$ 10,00
-Com tributação: R$ 10,10
-Deposito de: R$ 20,00
-Com tributação: R$ 19,90
