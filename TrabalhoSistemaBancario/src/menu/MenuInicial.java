@@ -25,23 +25,71 @@ public class MenuInicial {
 	Scanner scanner = new Scanner(System.in);
 	public void menuInicial(List<Conta> contas, List<Funcionario> funcionarios, Map<String, String> credenciais,
 			Map<String, Conta> validacao_conta, Map<String, Funcionario> validacao_funcionario){
-
+		
+		// IMPORTANTE: PARA QUE O CONSOLE EXECUTE AS CORES DE LINHA E FUNDO, PODE SER NECESSÁRIO ALTERAR AS CONFIGURAÇÕES DO SEU CONSOLE:
+		// Botão direito sobre o console > Preferences > clicar na seta da opção CONSOLE (no menu à esquerda) > clicar em ANSI support > marcar ENABLE ANSI SUPPORT
+		// Para não mostrar os códigos ao lado do terminal, DESMARQUE A OPÇÃO "SHOW ESCAPE SEQUENCES" 
+		
+		
+		//Cores de linha
+		String lPreto = "\u001B[30m";
+		String lVermelho = "\u001B[31m";
+		String lVerde = "\u001B[32m";
+		String lAmarelo = "\u001B[33m";
+		String lAzul = "\u001B[34m";
+		String lRoxo = "\u001B[35m";
+		String lCiano = "\u001B[36m";
+		String lBranco = "\u001B[37m";
+		String lReset = "\u001B[0m"; // volta para a cor padrão de LINHA do terminal
+		
+		// Cores de fundo
+		String fPreto =  "\u001B[40m";
+		String fVermelho = "\u001B[41m";
+		String fVerde = "\u001B[42m";
+		String fAmarelo = "\u001B[43m";
+		String fAzul = "\u001B[44m";
+		String fRoxo = "\u001B[45m";
+		String fCiano = "\u001B[46m";
+		String fBranco = "\u001B[47m";
+		String fReset = "\u001B[0m"; // volta para a cor padrão de FUNDO do terminal
+		
+		String flReset = "\u001B[0m";// reseta cores de LINHA E FUNDO simultaneamente
+		
+		
 		MenuInicial.setContas(contas);
 		MenuInicial.setFuncionarios(funcionarios);
 		MenuInicial.setCredenciais(credenciais);
 		MenuInicial.setValidacao_conta(validacao_conta);
 		MenuInicial.setValidacao_funcionario(validacao_funcionario);
 		Scanner scannerLogin = new Scanner(System.in);
-		System.out.println("╔════════════════════════════╗");
-		System.out.println("║   Digite seu CPF e SENHA:  ║");
+		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⣿⣿⠟⢋⣡⣤⣤⣤⣌⡉⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣿⣿⠟⢛⣛⣛⣁⠰⠿⢿⣿⣿⣿⣿⣿⣦⠄⢀⣤⣤⣄⡙⠻⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⡟⠐⠚⠛⠛⠛⠿⢿⣷⣦⣌⡙⠿⣿⣿⡿⣠⣿⠟⣉⡛⢿⣶⣌⠙⢿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⡇⢸⡏⠄⢀⣀⣤⣄⣀⠉⠻⢿⣦⡈⠩⣾⡿⠏⣬⣉⡛⠒⡈⠻⣷⣆⠙⢿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣷⠈⠇⠄⢈⣿⡛⠛⠻⢿⠄⣦⣍⠻⣷⡌⠐⠓⢒⣂⡐⢷⣌⠻⣦⡙⣷⡈⢻⣿");
+		System.out.println(lAzul + fPreto + "⣿⣷⡀⠴⢿⣿⣇⣄⣈⠪⣦⡉⢡⣷⢌⢻⣦⡘⡗⠙⠻⣦⡙⢷⣌⠻⣌⠻⡄⢻");
+		System.out.println(lAzul + fPreto + "⣿⣿⠇⡀⢀⢻⣿⣿⣿⣿⣿⣿⣆⢡⡾⠇⠙⣷⡀⣿⣿⡆⣬⣤⣭⣀⣬⣴⣬⣀");
+		System.out.println(lAzul + fPreto + "⣿⠟⣈⠃⠙⢿⣿⣿⡏⠛⠻⠿⣿⣷⣶⢞⢹⠘⣷⠈⡿⢰⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣿⢂⣉⣉⡛⣦⣿⣿⢃⣶⣶⣾⣿⣿⣏⣼⡟⠄⢹⡇⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⡇⠸⣿⣿⣿⣿⣿⣿⣾⣿⣿⡿⢻⣌⠛⢉⣴⡇⠈⡇⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣿⣦⣄⣉⠉⠛⠛⠛⠛⠛⢉⣠⣿⡿⠄⢮⣽⡇⠄⠇⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣷⣄⠄⢰⣶⣿⣿⣿⡿⠃⠺⠶⠟⠄⣀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⡟⠄⣸⣿⡿⠟⠋⢀⣰⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
+		System.out.println(lAzul + fPreto + "⣿⣿⣿⣿⣿⠄⠄⣉⣀⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿" + flReset);
+		System.out.println(lVerde + fBranco + " H E R M E T I U S   B A N K  " + flReset);
+		System.out.println(" ");
+		System.out.println(lVerde + fBranco + "╔════════════════════════════╗");
+		System.out.println("║   Digite CPF e SENHA:      ║");
 		System.out.println("╚════════════════════════════╝");
-		System.out.print("CPF: ");
+		System.out.print(lVerde + fBranco + "CPF: " + flReset + lBranco + fVerde);
 		String cpf = scannerLogin.nextLine();
-		System.out.print("SENHA: ");
+		System.out.print(lVerde + fBranco + "SENHA: " + flReset + lBranco + fVerde);
 		String senha = scannerLogin.nextLine();
-
+		System.out.println(flReset);
+		
 		if (credenciais.containsKey(cpf) && credenciais.get(cpf).compareTo(senha) == 0) {
-			System.out.println("Login efetuado com sucesso!");
+			System.out.println(fBranco + lVerde + "Login efetuado com sucesso!" + flReset);
 
 			if (validacao_conta.containsKey(cpf)) {
 				if (validacao_funcionario.containsKey(cpf)) {
@@ -68,7 +116,7 @@ public class MenuInicial {
 			}
 
 		} else {
-			System.out.println("Erro! CPF ou SENHA incorreta!");
+			System.out.println(fVermelho + lBranco + "Erro! CPF e/ou SENHA incorretos!" + flReset);
 			//Scanner scannerNext = new Scanner (System.in);
 			System.out.println("Pressione ENTER para continuar.");
 			scanner.nextLine();
@@ -81,7 +129,7 @@ public class MenuInicial {
 	public void menuCliente(Conta c, Map<String, Conta> validacao_conta, Funcionario f) {
 
 
-		System.out.println("\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ MENU ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println("\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ MENU ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
 		System.out.println("╔═══════════════════════════════════════════╗");
 		System.out.println("║ 1 -	Movimentações na conta		    ║");
 		System.out.println("║ 2  - 	Relatórios			    ║");
