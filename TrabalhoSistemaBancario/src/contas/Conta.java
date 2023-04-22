@@ -117,8 +117,14 @@ public abstract class Conta extends Cliente implements Operacoes, Comparable<Con
 
 	// Gera extrato (no terminal e .txt)
 	public void extrato() {
-		for(int i =0; i < movimentacoes.size(); i++) {
-			System.out.println(movimentacoes.get(i));
+		if(movimentacoes.size() != 0) {
+			for(int i =0; i < movimentacoes.size(); i++) {
+				System.out.println(movimentacoes.get(i));
+			}
+			
+		}else {
+			System.out.println("Ainda não foram feitas movimentações nesta conta.");
+			
 		}
 		
 		try {

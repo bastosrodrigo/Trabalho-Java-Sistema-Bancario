@@ -1,0 +1,10 @@
+|********************* EXTRATO ******************|
+Nome: Caio
+CPF: 879.974.100-82
+ID da conta: 1
+Agência: 3
+
+Deposito de: $2,000.00 (Com tributação: $1,999.90)
+Saque de: $100.00 (Com tributação: $100.10)
+
+Saldo total: $1,899.70

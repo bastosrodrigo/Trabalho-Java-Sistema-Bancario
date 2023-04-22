@@ -1,0 +1,8 @@
+|********************* EXTRATO ******************|
+Nome: Caio
+CPF: 879.974.100-82
+ID da conta: 1
+Agência: 3
+
+
+Saldo total: -$0.10

@@ -1,6 +1,6 @@
 TIPO;NOME;SENHA;CPF;AGENCIA;SALDO
-Conta Corrente;Caio;005;879.974.100-82;3;100.0
-Conta Poupança;Cecília;002;955.090.240-46;2;19500.0
+Conta Corrente;Caio;005;879.974.100-82;3;-0.10000
+Conta Poupança;Cecília;002;955.090.240-46;2;19400.0
 Conta Poupança;Fulano;900;026.428.250-78;2;243800.0
 Conta Poupança;João;123;772.398.320-40;1;547050.0
 Conta Corrente;Juliana;003;242.977.990-06;1;13200.0
