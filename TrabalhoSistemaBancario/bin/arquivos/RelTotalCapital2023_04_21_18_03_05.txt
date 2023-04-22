@@ -1,0 +1,3 @@
+|***************** RELATÓRIO DE TOTAL DE CAPITAL **************|
+Data e hora do relatório: 2023_04_21_18_03_05
+Total de capital do banco: R$ 860.014,60

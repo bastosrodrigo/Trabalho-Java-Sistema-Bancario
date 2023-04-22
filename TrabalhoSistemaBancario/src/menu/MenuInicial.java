@@ -217,10 +217,12 @@ public class MenuInicial {
 		case 1:
 			System.out.println("Digite o valor que deseja sacar: ");
 			double valorSaque = scanner.nextDouble();
-				if (c.getSaldo() >= valorSaque) {
+				if (c.getSaldo() >= valorSaque && valorSaque >=2) {
 					c.sacar(valorSaque);
 					System.out.println("Pressione ENTER para continuar.");
 					scannerMov.nextLine();
+				}else if(valorSaque <2){
+					System.out.println("Voce não pode sacar um valor menor que R$ 2.00");
 				}else {
 					System.out.println("Saldo insuficiente");
 					System.out.println("Pressione ENTER para continuar.");
