@@ -1,8 +1,0 @@
-|********************* EXTRATO ******************|
-Nome: Juliana
-CPF: 242.977.990-06
-ID da conta: 5
-Agência: 1
-
-
-Saldo total: $19,200.00

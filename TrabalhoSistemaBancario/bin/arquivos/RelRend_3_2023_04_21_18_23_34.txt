@@ -1,9 +1,0 @@
-|********************* RELATÓRIO DE RENDIMENTO ******************|
-Nome: Fulano
-CPF: 026.428.250-78
-ID da conta: 3
-Agência: 2
-
-Valor a ser aplicado: $2,000.00
-Quantidade de dias da aplicação: 80000
-Rendimento: $53,320.00

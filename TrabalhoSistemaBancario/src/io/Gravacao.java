@@ -12,21 +12,14 @@ import java.util.List;
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import contas.SeguroVida;
 import pessoas.Funcionario;
 import pessoas.Gerente;
 import pessoas.Presidente;
 
 public class Gravacao {
 	
-	
-	public static void teste() throws IOException {
-		
-		LocalDateTime data = LocalDateTime.now();
-        DateTimeFormatter formatar = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
-        String dataFormatada = data.format(formatar);
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + dataFormatada + ".txt", true));
-		buffWrite.append("teste");
-	}
+	// As gravações, com exceção dos relatórios, só ocorrem se o programa for finalizado corretamente pelo Menu
 	
 	
 	// Salva todas as movimentações realizadas no sistema durante a execução
@@ -63,7 +56,12 @@ public class Gravacao {
         buffWrite.append("Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "\n");
         buffWrite.append("Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "\n");
         buffWrite.append("Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "\n");
-        buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "\n");
+        if (SeguroVida.getListaContratos().contains(c.getCpf())) {
+			buffWrite.append("Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(3.0) + "\n");	
+			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + 3.0) + "\n");
+		} else {
+			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT));
+		}
         
         buffWrite.close();
 	}
@@ -192,4 +190,20 @@ public class Gravacao {
         buffWrite.append("\nSaldo total: " + NumberFormat.getCurrencyInstance().format(c.getSaldo()));
     	buffWrite.close();
 	}
+	
+	// Gera o arquivo com os CPF que possuem seguro de vida
+		public static void seguro(List<String> cpfs) throws IOException {
+			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "seguro.txt"));
+	   
+			buffWrite.append("CPF\n");
+			buffWrite.close();
+			
+	        for (int i = 0; i < cpfs.size(); i++) {
+	        	BufferedWriter cpf = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "seguro.txt", true));
+	    		cpf.append(cpfs.get(i) + "\n");
+	    		cpf.close();
+	        }
+	        
+	        buffWrite.close();
+		}
 }

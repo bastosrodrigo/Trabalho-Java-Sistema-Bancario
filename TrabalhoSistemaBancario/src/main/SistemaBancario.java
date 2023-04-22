@@ -33,6 +33,9 @@ public class SistemaBancario {
 		Leitura.leitor("./src/arquivos/pessoas.txt", contas, funcionarios, credenciais, validacao_conta,
 				validacao_funcionario);
 		
+		// Faz a leitura do seguro
+		Leitura.leitorSeguro("./src/arquivos/seguro.txt");
+		
 		
 		// Chama o Menu Inicial
 		MenuInicial menu = new MenuInicial();

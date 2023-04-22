@@ -9,6 +9,7 @@ import java.util.Map;
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import contas.SeguroVida;
 import pessoas.Diretor;
 import pessoas.Funcionario;
 import pessoas.Gerente;
@@ -16,6 +17,7 @@ import pessoas.Presidente;
 
 public class Leitura {
 
+	// Faz a leitura dos dados dos objetos
 	public static void leitor(String path, List<Conta> contas, List<Funcionario> funcionarios, Map<String, String> credenciais, Map<String, Conta> validacao_conta, Map<String, Funcionario> validacao_funcionario) throws IOException {
 
 		try {
@@ -64,6 +66,23 @@ public class Leitura {
 							break;
 					}
 				}
+		} catch (IOException IOe) {
+			System.out.println("Houve um erro ao ler o arquivo: "+IOe.getCause());
+		}
+	}
+	
+	// Faz a leitura do seguro
+	public static void leitorSeguro(String path) throws IOException {
+		
+		BufferedReader leitor = new BufferedReader(new FileReader(path));
+		
+		String linha = leitor.readLine();
+		
+		try {
+			while ((linha = leitor.readLine()) != null) {
+				String cpf = linha;
+				SeguroVida.getListaContratos().add(cpf);
+			}
 		} catch (IOException IOe) {
 			System.out.println("Houve um erro ao ler o arquivo: "+IOe.getCause());
 		}

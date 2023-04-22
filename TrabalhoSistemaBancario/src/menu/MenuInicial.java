@@ -8,6 +8,7 @@ import java.util.Scanner;
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import contas.SeguroVida;
 import io.Gravacao;
 import pessoas.Diretor;
 import pessoas.Funcionario;
@@ -152,8 +153,9 @@ public class MenuInicial {
 		System.out.println("╔═══════════════════════════════════════════╗");
 		System.out.println("║ 1  -	Movimentações na conta		    ║");
 		System.out.println("║ 2  - 	Relatórios			    ║");
-		System.out.println("║ 3  -	Voltar ao login			    ║");
-		System.out.println("║ 4  -	Encerrar o programa		    ║");
+		System.out.println("║ 3  - 	Contratar Seguro de Vida	    ║");
+		System.out.println("║ 4  -	Voltar ao login			    ║");
+		System.out.println("║ 5  -	Encerrar o programa		    ║");
 		System.out.println("╚═══════════════════════════════════════════╝");
 		System.out.print("\n\nDigite a opção desejada: ");
 		int opcaoConta = scanner.nextInt();
@@ -170,25 +172,35 @@ public class MenuInicial {
 			}
 			break;
 		case 3:
+			seguroDeVida(c, validacao_conta, f);
+			break;
+		case 4:
 			menuInicial(MenuInicial.getContas(), MenuInicial.getFuncionarios(), MenuInicial.getCredenciais(),
 					MenuInicial.getValidacao_conta(), MenuInicial.getValidacao_funcionario());
 			break;
-		case 4:
+		case 5:
 			System.out.println("Aplicação encerrada.");
 			
-				try {
-					Gravacao.pessoas(getContas(), getFuncionarios());
-				} catch (IOException e) {
-					System.out.println("Houve um erro ao gravar o arquivo.");
-				}
-				
-				try {
-					Gravacao.movimentacoes(getContas());
-				} catch (IOException e) {
-					System.out.println("Houve um erro ao gravar o arquivo.");
-				}
-				
-			System.exit(0);
+			// Geração de .txt
+			try {
+				Gravacao.pessoas(getContas(), getFuncionarios());
+			} catch (IOException e) {
+				System.out.println("Houve um erro ao gravar o arquivo.");
+			}
+			
+			try {
+				Gravacao.movimentacoes(getContas());
+			} catch (IOException e) {
+				System.out.println("Houve um erro ao gravar o arquivo.");
+			}
+			
+			try {
+				Gravacao.seguro(SeguroVida.getListaContratos());
+			} catch (IOException e) {
+				System.out.println("Houve um erro ao gravar o arquivo.");
+			}
+			
+		System.exit(0);
 			break;
 		default:
 			System.out.println("Opção inválida. Digite novamente:");
@@ -307,8 +319,14 @@ public class MenuInicial {
 				System.out.println("|	Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "			|");
 				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
 				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
-				System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
-				System.out.println("|========================================================\n\n");
+				if (SeguroVida.getListaContratos().contains(c.getCpf())) {
+					System.out.println("|	Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(3.0) + "		|");	
+					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + 3.0) + "			|");
+					System.out.println("|========================================================\n\n");
+				} else {
+					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
+					System.out.println("|========================================================\n\n");
+				}
 				
 				try {
 					Gravacao.tributacoes(c);
@@ -411,8 +429,14 @@ public class MenuInicial {
 				System.out.println("|	Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "			|");
 				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
 				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
-				System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
-				System.out.println("|========================================================\n\n");
+				if (SeguroVida.getListaContratos().contains(c.getCpf())) {
+					System.out.println("|	Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(3.0) + "		|");	
+					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + 3.0) + "			|");
+					System.out.println("|========================================================\n\n");
+				} else {
+					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
+					System.out.println("|========================================================\n\n");
+				}
 				
 				try {
 					Gravacao.tributacoes(c);
@@ -532,6 +556,53 @@ public class MenuInicial {
 			System.out.println("Opção inválida. Digite novamente:");
 			retornoRelatorio(c, f);
 			break;
+		}
+	}
+	
+	public void seguroDeVida(Conta c, Map<String, Conta> validacao_conta, Funcionario f) {
+		
+		Scanner scanSeguro = new Scanner(System.in);
+
+		if(c instanceof ContaCorrente) {
+				System.out.println("\n|*************** SEGURO DE VIDA ************|");
+				System.out.println("Você deseja contratar o Seguro de Vida?\n");
+				System.out.println("20% do valor total será cobrado de tributo\n"
+								 + " no momento da confirmação.\n");
+				System.out.println("1 - Sim");
+				System.out.println("2 - Não");
+				
+				System.out.println("\nDigite uma opção: ");
+				int opcaoSeguro = scanSeguro.nextInt();
+				scanSeguro.nextLine();
+				
+				switch (opcaoSeguro) {
+				case 1:
+						if (SeguroVida.getListaContratos().contains(c.getCpf())) {
+							System.out.println("\nVocê já possui Seguro de Vida!");
+							menuCliente(c, validacao_conta, f);
+						} else {
+							if(c.getSaldo() >= 3) {
+								c.setSaldo(c.getSaldo() - 3.0);
+								System.out.println("\nSeguro de vida contratado com sucesso!");
+								SeguroVida.getListaContratos().add(c.getCpf());
+								menuCliente(c, validacao_conta, f);
+							} else {
+								System.out.println("\nSaldo insuficiente!");
+								menuCliente(c, validacao_conta, f);
+							}
+						}
+					break;
+				case 2:
+					menuCliente(c, validacao_conta, f);
+					break;
+				default:
+					System.out.println("Opção inválida. Tente novamente.");
+					seguroDeVida(c, validacao_conta, f);
+					break;
+				}
+		} else {
+			System.out.println("Serviço indisponível para seu tipo de conta!");
+			menuCliente(c, validacao_conta, f);
 		}
 	}
 
