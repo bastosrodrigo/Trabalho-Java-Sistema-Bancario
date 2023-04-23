@@ -321,7 +321,7 @@ public class MenuInicial {
 				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
 				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
 				if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
-					System.out.println("|	Tributação de seguro de vida: " + SeguroVida.getListaContratos().get(c.getCpf()) + "		|");	
+					System.out.println("|	Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(SeguroVida.getListaContratos().get(c.getCpf())) + "		|");	
 					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + SeguroVida.getListaContratos().get(c.getCpf())) + "			|");
 					System.out.println("|========================================================\n\n");
 				} else {
@@ -685,9 +685,5 @@ public class MenuInicial {
 
 	public static void setTaxaSeguro(double taxaSeguro) {
 		MenuInicial.taxaSeguro = taxaSeguro;
-	}
-
-	public static double getTaxaSeguro() {
-		return taxaSeguro;
-	}			
+	}		
 }

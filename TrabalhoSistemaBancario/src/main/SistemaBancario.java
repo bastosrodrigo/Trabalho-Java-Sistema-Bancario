@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import contas.Conta;
+import contas.SeguroVida;
 import io.Leitura;
 import menu.MenuInicial;
 import pessoas.Funcionario;
@@ -40,7 +41,6 @@ public class SistemaBancario {
 		// Chama o Menu Inicial
 		MenuInicial menu = new MenuInicial();
 		menu.menuInicial(contas, funcionarios, credenciais, validacao_conta, validacao_funcionario);
-		
 		
 	}
 }

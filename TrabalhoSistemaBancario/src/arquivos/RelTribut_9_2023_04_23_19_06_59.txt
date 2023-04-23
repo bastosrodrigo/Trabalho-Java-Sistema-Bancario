@@ -1,0 +1,11 @@
+|********************* RELATÓRIO DE TRIBUTAÇÃO ******************|
+Nome: Rodrigo
+CPF: 219.932.120-78
+ID da conta: 9
+Agência: 4
+
+Tributação de saques: $0.00
+Tributação de depósitos: $0.00
+Tributação de transferencias: $0.00
+Tributação de seguro de vida: $200.00
+Total de tributação: $200.00

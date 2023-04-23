@@ -1,0 +1,11 @@
+|********************* RELATÓRIO DE TRIBUTAÇÃO ******************|
+Nome: Juliana
+CPF: 242.977.990-06
+ID da conta: 5
+Agência: 1
+
+Tributação de saques: $0.00
+Tributação de depósitos: $0.00
+Tributação de transferencias: $0.00
+Tributação de seguro de vida: $20.00
+Total de tributação: $20.00

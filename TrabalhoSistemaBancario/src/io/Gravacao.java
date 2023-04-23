@@ -59,8 +59,8 @@ public class Gravacao {
         buffWrite.append("Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "\n");
         buffWrite.append("Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "\n");
         if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
-			buffWrite.append("Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(MenuInicial.getTaxaSeguro()) + "\n");	
-			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + MenuInicial.getTaxaSeguro()) + "\n");
+			buffWrite.append("Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(totalT + SeguroVida.getListaContratos().get(c.getCpf())) + "\n");	
+			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + SeguroVida.getListaContratos().get(c.getCpf())) + "\n");
 		} else {
 			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT));
 		}
