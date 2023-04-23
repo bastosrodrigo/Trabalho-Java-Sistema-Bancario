@@ -80,8 +80,10 @@ public class Leitura {
 		
 		try {
 			while ((linha = leitor.readLine()) != null) {
-				String cpf = linha;
-				SeguroVida.getListaContratos().add(cpf);
+				String[] valores = linha.split(";");
+				String cpf = valores[0];
+				Double taxa = Double.parseDouble(valores[1]);
+				SeguroVida.getListaContratos().put(cpf, taxa);
 			}
 		} catch (IOException IOe) {
 			System.out.println("Houve um erro ao ler o arquivo: "+IOe.getCause());

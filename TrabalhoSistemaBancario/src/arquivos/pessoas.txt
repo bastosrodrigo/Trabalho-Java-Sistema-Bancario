@@ -3,8 +3,8 @@ Conta Corrente;Caio;005;879.974.100-82;3;-0.1
 Conta Poupança;Cecília;002;955.090.240-46;2;19400.0
 Conta Poupança;Fulano;900;026.428.250-78;2;243800.0
 Conta Poupança;João;123;772.398.320-40;1;547050.0
-Conta Corrente;Juliana;003;242.977.990-06;1;13197.0
-Conta Corrente;Luis;004;672.475.560-30;2;1465.4000000000008
+Conta Corrente;Juliana;003;242.977.990-06;1;8197.0
+Conta Corrente;Luis;004;672.475.560-30;2;1425.4000000000008
 Conta Poupança;Maria;456;866.165.500-52;2;20300.0
 Conta Poupança;Roberto;001;688.405.750-57;4;100.0
 Conta Corrente;Rodrigo;006;219.932.120-78;4;8630.999999999996

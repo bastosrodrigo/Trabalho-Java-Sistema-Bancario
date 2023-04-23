@@ -22,6 +22,7 @@ public class MenuInicial {
 	private static Map<String, String> credenciais;
 	private static Map<String, Conta> validacao_conta;
 	private static Map<String, Funcionario> validacao_funcionario;
+	private static Double taxaSeguro;
 	Scanner scanner = new Scanner(System.in);
 	
 	
@@ -319,9 +320,9 @@ public class MenuInicial {
 				System.out.println("|	Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "			|");
 				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
 				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
-				if (SeguroVida.getListaContratos().contains(c.getCpf())) {
-					System.out.println("|	Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(3.0) + "		|");	
-					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + 3.0) + "			|");
+				if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
+					System.out.println("|	Tributação de seguro de vida: " + SeguroVida.getListaContratos().get(c.getCpf()) + "		|");	
+					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + SeguroVida.getListaContratos().get(c.getCpf())) + "			|");
 					System.out.println("|========================================================\n\n");
 				} else {
 					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
@@ -429,9 +430,9 @@ public class MenuInicial {
 				System.out.println("|	Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "			|");
 				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
 				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
-				if (SeguroVida.getListaContratos().contains(c.getCpf())) {
-					System.out.println("|	Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(3.0) + "		|");	
-					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + 3.0) + "			|");
+				if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
+					System.out.println("|	Tributação de seguro de vida: " + taxaSeguro + "		|");	
+					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + taxaSeguro) + "			|");
 					System.out.println("|========================================================\n\n");
 				} else {
 					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
@@ -564,7 +565,7 @@ public class MenuInicial {
 		Scanner scanSeguro = new Scanner(System.in);
 
 		if(c instanceof ContaCorrente) {
-				System.out.println("\n|*************** SEGURO DE VIDA ************|");
+				System.out.println("\n|************ SEGURO DE VIDA ************|");
 				System.out.println("Você deseja contratar o Seguro de Vida?\n");
 				System.out.println("20% do valor total será cobrado de tributo\n"
 								 + " no momento da confirmação.\n");
@@ -577,14 +578,18 @@ public class MenuInicial {
 				
 				switch (opcaoSeguro) {
 				case 1:
-						if (SeguroVida.getListaContratos().contains(c.getCpf())) {
+						if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
 							System.out.println("\nVocê já possui Seguro de Vida!");
 							menuCliente(c, validacao_conta, f);
 						} else {
-							if(c.getSaldo() >= 3) {
-								c.setSaldo(c.getSaldo() - 3.0);
+							System.out.println("Qual valor deseja ser segurado?");
+							taxaSeguro = scanSeguro.nextDouble();
+							taxaSeguro = taxaSeguro * 0.20;
+							
+							if(c.getSaldo() >= taxaSeguro) {
+								c.setSaldo(c.getSaldo() - taxaSeguro);
 								System.out.println("\nSeguro de vida contratado com sucesso!");
-								SeguroVida.getListaContratos().add(c.getCpf());
+								SeguroVida.getListaContratos().put(c.getCpf(), taxaSeguro);
 								menuCliente(c, validacao_conta, f);
 							} else {
 								System.out.println("\nSaldo insuficiente!");
@@ -677,5 +682,12 @@ public class MenuInicial {
 	public static void setValidacao_funcionario(Map<String, Funcionario> validacao_funcionario) {
 		MenuInicial.validacao_funcionario = validacao_funcionario;
 	}
-	
+
+	public static void setTaxaSeguro(double taxaSeguro) {
+		MenuInicial.taxaSeguro = taxaSeguro;
+	}
+
+	public static double getTaxaSeguro() {
+		return taxaSeguro;
+	}			
 }

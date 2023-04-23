@@ -8,11 +8,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
 import contas.SeguroVida;
+import menu.MenuInicial;
 import pessoas.Funcionario;
 import pessoas.Gerente;
 import pessoas.Presidente;
@@ -56,9 +58,9 @@ public class Gravacao {
         buffWrite.append("Tributação de saques: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoSaque()) + "\n");
         buffWrite.append("Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "\n");
         buffWrite.append("Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "\n");
-        if (SeguroVida.getListaContratos().contains(c.getCpf())) {
-			buffWrite.append("Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(3.0) + "\n");	
-			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + 3.0) + "\n");
+        if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
+			buffWrite.append("Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(MenuInicial.getTaxaSeguro()) + "\n");	
+			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + MenuInicial.getTaxaSeguro()) + "\n");
 		} else {
 			buffWrite.append("Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT));
 		}
@@ -192,18 +194,22 @@ public class Gravacao {
 	}
 	
 	// Gera o arquivo com os CPF que possuem seguro de vida
-		public static void seguro(List<String> cpfs) throws IOException {
+		public static void seguro(Map<String, Double> cpfs) throws IOException {
 			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "seguro.txt"));
 	   
 			buffWrite.append("CPF\n");
 			buffWrite.close();
 			
-	        for (int i = 0; i < cpfs.size(); i++) {
-	        	BufferedWriter cpf = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "seguro.txt", true));
-	    		cpf.append(cpfs.get(i) + "\n");
-	    		cpf.close();
-	        }
-	        
+			BufferedWriter cpf = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "seguro.txt", true));
+			cpfs.forEach((chave, valor)-> {
+				try {
+					cpf.append(chave + ";" + valor + "\n");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+				cpf.close();
 	        buffWrite.close();
 		}
 }

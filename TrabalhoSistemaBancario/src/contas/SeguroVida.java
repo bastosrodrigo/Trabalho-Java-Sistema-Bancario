@@ -1,17 +1,19 @@
 package contas;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class SeguroVida {
 
-	private static List<String> listaContratos = new ArrayList<>();
+	private static Map<String, Double> listaContratos = new HashMap<>();
+
 	
 	public SeguroVida() {
 		
 	}
 
-	public static List<String> getListaContratos() {
+	public static Map<String, Double> getListaContratos() {
 		return listaContratos;
 	}
 }
