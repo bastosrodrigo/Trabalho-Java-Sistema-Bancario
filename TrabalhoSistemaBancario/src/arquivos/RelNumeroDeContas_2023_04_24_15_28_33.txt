@@ -1,0 +1,3 @@
+|***************** RELATÓRIO DE NÚMERO DE CONTAS **************|
+Data e hora do relatório: 2023_04_24_15_28_33
+Número de contas: 2

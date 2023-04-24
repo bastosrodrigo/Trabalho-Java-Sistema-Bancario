@@ -353,6 +353,13 @@ public class MenuInicial {
 				double valor = scanner.nextDouble();
 				double rendimento = valor * (dias / 30) * 0.01;
 				System.out.println("O rendimento será de: " + NumberFormat.getCurrencyInstance().format(rendimento));
+				
+				try {
+					Gravacao.rendimentos(dias, valor, rendimento, c);
+				} catch (IOException e) {
+					System.out.println("Houve um erro ao gerar o arquivo.");
+				}
+				
 				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				relatoriosClientes(c);
@@ -431,8 +438,8 @@ public class MenuInicial {
 				System.out.println("|	Tributação de depósitos: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoDeposito()) + "			|");
 				System.out.println("|	Tributação de transferencias: " + NumberFormat.getCurrencyInstance().format(((ContaCorrente) c).getTributacaoTransferencia()) + "		|");
 				if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
-					System.out.println("|	Tributação de seguro de vida: " + taxaSeguro + "		|");	
-					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT + taxaSeguro) + "			|");
+					System.out.println("|	Tributação de seguro de vida: " + NumberFormat.getCurrencyInstance().format(SeguroVida.getListaContratos().get(c.getCpf())) + "		|");	
+					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(SeguroVida.getListaContratos().get(c.getCpf())) + "			|");
 					System.out.println("|========================================================\n\n");
 				} else {
 					System.out.println("|	Total de tributação: " + NumberFormat.getCurrencyInstance().format(totalT) + "			|");
@@ -465,7 +472,6 @@ public class MenuInicial {
 				double valor = scanner.nextDouble();
 				double rendimento = valor * (dias / 30) * 0.01;
 				System.out.println("O rendimento será de: " + NumberFormat.getCurrencyInstance().format(rendimento));
-				System.out.println("Pressione ENTER para continuar.");
 				
 				try {
 					Gravacao.rendimentos(dias, valor, rendimento, c);
@@ -473,6 +479,7 @@ public class MenuInicial {
 					System.out.println("Houve um erro ao gerar o arquivo.");
 				}
 				
+				System.out.println("Pressione ENTER para continuar.");
 				scannerRel.nextLine();
 				retornoRelatorio(c, f);
 			} else {

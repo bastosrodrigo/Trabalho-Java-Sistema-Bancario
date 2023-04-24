@@ -197,7 +197,7 @@ public class Gravacao {
 		public static void seguro(Map<String, Double> cpfs) throws IOException {
 			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "seguro.txt"));
 	   
-			buffWrite.append("CPF\n");
+			buffWrite.append("CPF;TRIBUTO"+"\n");
 			buffWrite.close();
 			
 			BufferedWriter cpf = new BufferedWriter(new FileWriter(".\\src\\arquivos\\" + "seguro.txt", true));
@@ -205,7 +205,7 @@ public class Gravacao {
 				try {
 					cpf.append(chave + ";" + valor + "\n");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					System.out.println("Houve um erro ao gerar o arquivo.");
 					e.printStackTrace();
 				}
 			});

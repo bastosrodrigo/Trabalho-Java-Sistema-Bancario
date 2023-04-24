@@ -1,0 +1,10 @@
+|********************* RELATÓRIO DE TRIBUTAÇÃO ******************|
+Nome: Caio
+CPF: 879.974.100-82
+ID da conta: 1
+Agência: 3
+
+Tributação de saques: $0.10
+Tributação de depósitos: $0.00
+Tributação de transferencias: $0.00
+Total de tributação: $0.10

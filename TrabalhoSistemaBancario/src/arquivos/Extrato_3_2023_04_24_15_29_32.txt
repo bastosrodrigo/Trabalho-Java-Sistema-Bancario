@@ -1,0 +1,9 @@
+|********************* EXTRATO ******************|
+Nome: Fulano
+CPF: 026.428.250-78
+ID da conta: 3
+Agência: 2
+
+Saque de: $50.00
+
+Saldo total: $243,750.00
