@@ -1,9 +1,0 @@
-|********************* RELATÓRIO DE RENDIMENTO ******************|
-Nome: Cecília
-CPF: 955.090.240-46
-ID da conta: 2
-Agência: 2
-
-Valor a ser aplicado: $100.00
-Quantidade de dias da aplicação: 100
-Rendimento: $3.00

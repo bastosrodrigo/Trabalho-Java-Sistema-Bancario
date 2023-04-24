@@ -586,7 +586,9 @@ public class MenuInicial {
 				switch (opcaoSeguro) {
 				case 1:
 						if (SeguroVida.getListaContratos().containsKey(c.getCpf())) {
-							System.out.println("\nVocê já possui Seguro de Vida!");
+							System.out.println("\nVocê já possui Seguro de Vida!\n");
+							System.out.println("Pressione ENTER para continuar.");
+							scanSeguro.nextLine();
 							menuCliente(c, validacao_conta, f);
 						} else {
 							System.out.println("Qual valor deseja ser segurado?");
@@ -597,9 +599,15 @@ public class MenuInicial {
 								c.setSaldo(c.getSaldo() - taxaSeguro);
 								System.out.println("\nSeguro de vida contratado com sucesso!");
 								SeguroVida.getListaContratos().put(c.getCpf(), taxaSeguro);
+								System.out.println("Pressione ENTER para continuar.");
+								scanSeguro.nextLine();
+								scanSeguro.nextLine();
 								menuCliente(c, validacao_conta, f);
 							} else {
 								System.out.println("\nSaldo insuficiente!");
+								System.out.println("Pressione ENTER para continuar.");
+								scanSeguro.nextLine();
+								scanSeguro.nextLine();
 								menuCliente(c, validacao_conta, f);
 							}
 						}

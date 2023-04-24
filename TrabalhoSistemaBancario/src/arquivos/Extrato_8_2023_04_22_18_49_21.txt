@@ -1,8 +1,0 @@
-|********************* EXTRATO ******************|
-Nome: Roberto
-CPF: 688.405.750-57
-ID da conta: 8
-Agência: 4
-
-
-Saldo total: $0.00

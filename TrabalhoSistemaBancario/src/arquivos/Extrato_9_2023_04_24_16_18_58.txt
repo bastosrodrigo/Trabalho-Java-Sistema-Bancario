@@ -1,0 +1,11 @@
+|********************* EXTRATO ******************|
+Nome: Rodrigo
+CPF: 219.932.120-78
+ID da conta: 9
+Agência: 4
+
+Saque de: $500.00 (Com tributação: $500.10)
+Deposito de: $500.00 (Com tributação: $499.90)
+Transferencia de: $500.00 para: 688.405.750-57 (Com tributação: $500.20)
+
+Saldo total: $7,430.50

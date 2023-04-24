@@ -1,9 +1,0 @@
-|********************* EXTRATO ******************|
-Nome: William
-CPF: 872.895.900-07
-ID da conta: 11
-Agência: 4
-
-Saque de: $50.00 (Com tributação: $50.10)
-
-Saldo total: $3,953.00
